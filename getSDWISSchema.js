@@ -1,7 +1,7 @@
 const { buildEPASchema } = require('./EPAModelUtils');
 
 const EPAModelUrl = 'https://www.epa.gov/enviro/sdwis-model';
-const OutputFileName = 'SDWIS_schema2.json';
+const OutputFileName = 'SDWIS_schema.json';
 
 /** 
  * This file reaches out to the EPA's website and pulls the web pages for the
