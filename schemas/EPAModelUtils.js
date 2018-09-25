@@ -13,24 +13,15 @@ const buildEPASchema = (ModelUrl, OutputFileName) => {
   // The EPA website is very inconsistent with it's urls across databases.  We're
   // trying to pull schema info for SDWIS, RadNet and Tri databases so these REGEXs 
   // are designed to be able to support all three.
-  //const tableUrlRegex = new RegExp(/\"(\/\/ofmpub\.epa\.gov\/enviro\/EF_METADATA_HTML..*?_page\?p_column_name\=(.*?))[&|"]/g);
   const tableUrlRegex = new RegExp(/<area.*?href="(.*?)".*?>/g);
   const tableNameRegex = new RegExp(/p_table_name=(.*?)&/);
-  // const tableUrlRegex = new RegExp(/\"(https?:\/\/iaspub\.epa\.gov\/enviro\/ef_metadata_html\.ef_metadata_table\?p_table_name=(.*?\?:&))\"/g);
-  //const tableUrlRegex = new RegExp(/<a href=\"https:\/\/iaspub\.epa\.gov\/enviro\/ef_metadata_html\.ef_metadata_table\?p_table_name=(.*)\&amp;p_topic=SDWIS\" target=\"_blank\">/g);
-  //const tableHrefRegex = new RegExp(/<a href=\"(.*)\" target=\"_blank\">/);
-
+  
   // Regex that finds the table description on a table page
   const tableDescRegex = new RegExp(/(?:<b>Description:<\/b>\r?\n?)([\s\S]*?)(?:[<br>]?<b>Columns:<\/b>)/);
 
   // Regex that finds the Url for a field on a EPA table page
   const fieldUrlRegex = new RegExp(/\"(\/\/ofmpub\.epa\.gov\/enviro\/EF_METADATA_HTML(?:.*?_page\?)p_column_name\=(.+?(?=&|")).*?)"/g);
-  // const fieldUrlRegex = new RegExp(/\"(\/\/ofmpub\.epa\.gov\/enviro\/EF_METADATA_HTML..*?_page\?p_column_name\=(.*?))[&|"]/g);
-
-  // const fieldUrlRegex = new RegExp(/\"(\/\/ofmpub\.epa\.gov\/enviro\/EF_METADATA_HTML\..*?_page\?p_column_name\=(?:.*?))\"/g);
-  // const fieldUrlRegex = new RegExp(/<a href=\"\/\/ofmpub.epa.gov\/enviro\/EF_METADATA_HTML.sdwis_page\?p_column_name=(.*)\">/g);
-  // const fieldHrefRegex = new RegExp(/<a href=\"(.*)\">/);
-
+  
   // Regex that finds the field description on a field page
   const fieldDescRegex = new RegExp(/(?:<b>Description:\s?<\/b>\r?\n?)([\s\S]*?)(?:[<br>]?<b>Envirofacts Table Name\(s\):<\/b>)/);
 
@@ -38,7 +29,6 @@ const buildEPASchema = (ModelUrl, OutputFileName) => {
   const propsULRegex = new RegExp(/<b>Properties:<\/b><ul>([\s\S]*?)<\/ul>/);
   // Regex that splits out the property names and values from the props unordered list
   const propRegex = new RegExp(/<b>(.+?):<\/b>\s?(.*?)\s?<\/li>/g);
-  // const propRegex = new RegExp(/<b>(.+?)<\/b>(.+?)<\/li>/g);
 
   // Removes some white space from 
   const replaceWhitespace = new RegExp(/[\s:]/g);
@@ -96,7 +86,6 @@ const buildEPASchema = (ModelUrl, OutputFileName) => {
       {
         retries: 3,
         retryDelay: (retryCount) => {
-          console.log({retryCount});
           return retryCount * 2000;
         }
       }
