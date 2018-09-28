@@ -1,0 +1,24 @@
+{
+  "name": "safe-water",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "axios-retry": "^3.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlangevin/safe-water.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jlangevin/safe-water/issues"
+  },
+  "homepage": "https://github.com/jlangevin/safe-water#readme"
+}
