@@ -4,12 +4,12 @@ import json
 import functools
 import requests
 import logging
+import logging
+import csv
+import os
+
 from xml.etree import ElementTree
 
-# logging.basicConfig(
-#     format='%(asctime)s %(levelname)-4s %(message)s',
-#     level=logging.INFO,
-#     datefmt='%H:%M:%S')
 
 swdis_schema = None 
 
@@ -41,15 +41,11 @@ def column_headers (json_table_schema):
     return table_headers
 
 def create_csv_row (table_headers, xml_object):
-    csv_string = ''
+    csv_row = []
     for header_name in table_headers:
         value = xml_object.find(header_name).text
-        if value is None:
-            csv_string += ''
-        else:
-            csv_string += '"' + value + '"'
-        csv_string += ','
-    return csv_string + '\n'
+        csv_row.append(value)
+    return csv_row
 
 
 
@@ -60,15 +56,11 @@ for key in swdis_schema:
     table_list.append(key)
 
 
-first_table = table_list[0]
-header_list = column_headers(swdis_schema[first_table])
-
-first_url = build_base_url(first_table)
-first_response = requests.get(first_url)
-first_parsed_response = ElementTree.fromstring(first_response.content)
-
 ## containing directory
-containing_directory = "data_pulls/swdis-data/"
+containing_directory = "data/swdis/"
+
+if not os.path.exists(containing_directory):
+    os.makedirs(containing_directory)
 
 ## The errors seem to be inconsitant amongsht attempts at reproduction
 ## I have not yet pulled a full dataset however it seems as though
@@ -78,22 +70,30 @@ containing_directory = "data_pulls/swdis-data/"
 
 ## My best guess here is that sometimes we get garbage XML and the best thing
 ## we can do is to just retry in those cases
-def pull_table_to_csv (table_name, batch_size=10000, max_attempts=10, dir="raw_data/"):
+def pull_table_to_csv (table_name,
+                       batch_size=10000,
+                       max_attempts=10,
+                       dir="raw_data/"):
+    
+    LOG_FILENAME = containing_directory + table_name + '.log'
+    logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
+
     # open file connection
     filename = table_name + ".csv"
     filepath = containing_directory + filename
     file_object = open(filepath, 'w')
+    swdis_csv_writer = csv.writer(file_object)
 
     #grab header info based off of json schema
     headers = column_headers(swdis_schema[table_name])
 
     ## concatenate & write out headers to the file
-    file_object.write(','.join(map(str, headers)) + "\n")
 
+    swdis_csv_writer.writerow(headers)
     #build out the base url
     base_url = build_base_url(table_name)
     #curry fn to make a conversion fun that we can apply to xml nodes
-    csv_conversion_fn = functools.partial(create_csv_row, headers)
+    swdis_csv_conversion_fn = functools.partial(create_csv_row, headers)
 
     total_records = 0
 
@@ -102,34 +102,43 @@ def pull_table_to_csv (table_name, batch_size=10000, max_attempts=10, dir="raw_d
         url_attempts = 0 # the number of times this URL has been attempted
 
         url = base_url + '/Rows/' + str(total_records) + ':' + str(total_records + batch_size - 1)
+        logging.debug("using url " + url)
         print("using url ", url)
 
         try:
             xml_response = ElementTree.fromstring(requests.get(url).content)
+            logging.debug('pulling additional records up too '+ str(total_records))
 
             for record_element in xml_response:
+                swdis_csv_writer.writerow(swdis_csv_conversion_fn(record_element))
 
-                file_object.write(csv_conversion_fn(record_element))
                 response_attributes = xml_response.attrib
+            logging.debug('Valid URL attempt')
+            url_attempts = 0 # reset the counter 
 
-                url_attempts = 0 # reset the counter 
-
-                # if we get less than we expect we are done!
-                if int(response_attributes['Count']) < batch_size: 
+            # if we get less than we expect we are done!
+            if int(response_attributes['Count']) < batch_size: 
                     more_data = False
 
             total_records += int(response_attributes['Count'])
         except ElementTree.ParseError:
-            print("Parse Error encountered, retrying URL")
+            logging.debug('Parse Error encountered, retrying URL')
             url_attempts += 1
             if url_attempts > max_attempts:
-                print("max number of attempts exceeded, breaking out of loop")
+                logging.debug('max number of attempts exceeded, breaking out of loop')
                 return
 
 
     file_object.close()
+
+    logging.debug('done pulling table')
     print("done!")
     return
+
+
+for table in table_list:
+    pull_table_to_csv(table)
+
 
 ## if we have a function that could quickly figure out how many rows would be
 ## involved in generated the database then we could crunch it
