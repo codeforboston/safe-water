@@ -28,3 +28,6 @@ yarn-error.log*
 
 # data files
 /data
+
+# jupyter notebook checkpoints
+.ipyn_checkpoints/
