@@ -57,7 +57,7 @@ for key in swdis_schema:
 
 
 ## containing directory
-containing_directory = "data/swdis/"
+containing_directory = "data/"
 
 if not os.path.exists(containing_directory):
     os.makedirs(containing_directory)
@@ -70,11 +70,14 @@ if not os.path.exists(containing_directory):
 
 ## My best guess here is that sometimes we get garbage XML and the best thing
 ## we can do is to just retry in those cases
-def pull_table_to_csv (table_name,
-                       batch_size=10000,
-                       max_attempts=10,
-                       dir="raw_data/"):
-    
+def pull_table_to_csv (
+        table_json,
+        table_name,
+        batch_size=10000,
+        max_attempts=10,
+        dir="raw_data/",
+        max_pulls=None):
+
     LOG_FILENAME = containing_directory + table_name + '.log'
     logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
 
@@ -85,7 +88,7 @@ def pull_table_to_csv (table_name,
     swdis_csv_writer = csv.writer(file_object)
 
     #grab header info based off of json schema
-    headers = column_headers(swdis_schema[table_name])
+    headers = column_headers(table_json)
 
     ## concatenate & write out headers to the file
 
@@ -96,6 +99,7 @@ def pull_table_to_csv (table_name,
     swdis_csv_conversion_fn = functools.partial(create_csv_row, headers)
 
     total_records = 0
+    total_pulls = 0
 
     more_data = True
     while more_data:
@@ -106,6 +110,11 @@ def pull_table_to_csv (table_name,
         print("using url ", url)
 
         try:
+            url_response = requests.get(url).content
+            if (not url_response): # empty response
+                logging.debug("empty string response, no more data, breaking out of loop")
+                print("empty string response, no more data, breaking out of loop")
+                return
             xml_response = ElementTree.fromstring(requests.get(url).content)
             logging.debug('pulling additional records up too '+ str(total_records))
 
@@ -114,13 +123,18 @@ def pull_table_to_csv (table_name,
 
                 response_attributes = xml_response.attrib
             logging.debug('Valid URL attempt')
-            url_attempts = 0 # reset the counter 
+            url_attempts = 0 # reset the counter
 
+            total_pulls += 1 #increment total pulls
             # if we get less than we expect we are done!
             if int(response_attributes['Count']) < batch_size: 
                     more_data = False
 
             total_records += int(response_attributes['Count'])
+            if (max_pulls is not None) and (max_pulls <= total_pulls):
+                logging.debug('max pulls, breaking out of loop')
+                print("max pulls, breaking out of loop")
+                return
         except ElementTree.ParseError:
             logging.debug('Parse Error encountered, retrying URL')
             url_attempts += 1
@@ -135,9 +149,18 @@ def pull_table_to_csv (table_name,
     print("done!")
     return
 
+## takes a json structure referencing the a set of tables 
+## and uses the information to scrap the data from the 
+## epa site
 
-for table in table_list:
-    pull_table_to_csv(table)
+def pull_json_tables(meta_json, max_pulls=None):
+    for table_name in meta_json:
+        pull_table_to_csv(meta_json[table_name], table_name, max_pulls=max_pulls)
+
+
+
+#for table in table_list:
+#    pull_table_to_csv(table)
 
 
 ## if we have a function that could quickly figure out how many rows would be
@@ -149,8 +172,28 @@ for table in table_list:
 ## def find_db_row_count (table_name, batch_size=10000, max_attempts=10):
 
     
+tri_facility_id_schema = None
+
+with open("schemas/TRI_Facility_Identification.json") as schema:
+    tri_facility_id_schema = json.load(schema)
+    schema.close()
 
 
+def list_all_schemas(directory):
+    json_schemas = []
+    for file in os.listdir(directory):
+        if file.endswith(".json"):
+            json_schemas.append(file)
+    return json_schemas
 
+def pull_envirofacts_data (max_pulls=None):
+    for schema_file in list_all_schemas("schemas"):
+        schema_file_path = 'schemas/' + schema_file
+        print("loading metadata from ", schema_file_path)
+        with open(schema_file_path) as schema_file_object:
+            meta_json = json.load(schema_file_object)
+            print("retrieving associated data")
+            pull_json_tables(meta_json, max_pulls=max_pulls)
+    print("done pulling envirofacts data")
 
 
