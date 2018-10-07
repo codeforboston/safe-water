@@ -11,11 +11,11 @@ import os
 from xml.etree import ElementTree
 
 
-swdis_schema = None 
+# swdis_schema = None 
 
-with open("json-schemas/SDWIS_schema.json") as schema:
-    swdis_schema = json.load(schema)
-    schema.close()
+# with open("json-schemas/SDWIS_schema.json") as schema:
+#     swdis_schema = json.load(schema)
+#     schema.close()
 
 
 # example_url = "https://iaspub.epa.gov/enviro/efservice/VIOLATION/ROWS/0:1000"
@@ -171,12 +171,12 @@ def pull_json_tables(meta_json, max_pulls=None):
 
 ## def find_db_row_count (table_name, batch_size=10000, max_attempts=10):
 
-    
-tri_facility_id_schema = None
 
-with open("schemas/TRI_Facility_Identification.json") as schema:
-    tri_facility_id_schema = json.load(schema)
-    schema.close()
+# tri_facility_id_schema = None
+
+# with open("schemas/TRI_Facility_Identification.json") as schema:
+#     tri_facility_id_schema = json.load(schema)
+#     schema.close()
 
 
 def list_all_schemas(directory):
