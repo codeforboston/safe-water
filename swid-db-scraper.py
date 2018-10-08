@@ -49,11 +49,11 @@ def create_csv_row (table_headers, xml_object):
 
 
 
-## examples
-table_list = []
+# ## examples
+# table_list = []
 
-for key in swdis_schema:
-    table_list.append(key)
+# for key in swdis_schema:
+#     table_list.append(key)
 
 
 ## containing directory
@@ -75,15 +75,18 @@ def pull_table_to_csv (
         table_name,
         batch_size=10000,
         max_attempts=10,
-        dir="raw_data/",
+        directory="raw_data/",
         max_pulls=None):
 
+    if not os.path.exists(containing_directory + directory):
+        os.makedirs(containing_directory + directory)
     LOG_FILENAME = containing_directory + table_name + '.log'
     logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
 
     # open file connection
     filename = table_name + ".csv"
-    filepath = containing_directory + filename
+    filepath = containing_directory + directory + filename
+    print(filepath)
     file_object = open(filepath, 'w')
     swdis_csv_writer = csv.writer(file_object)
 
@@ -153,9 +156,14 @@ def pull_table_to_csv (
 ## and uses the information to scrap the data from the 
 ## epa site
 
-def pull_json_tables(meta_json, max_pulls=None):
+def pull_json_tables(meta_json,
+                     directory='',
+                     max_pulls=None):
     for table_name in meta_json:
-        pull_table_to_csv(meta_json[table_name], table_name, max_pulls=max_pulls)
+        pull_table_to_csv(meta_json[table_name],
+                          table_name,
+                          max_pulls=max_pulls,
+                          directory=directory)
 
 
 
@@ -188,12 +196,14 @@ def list_all_schemas(directory):
 
 def pull_envirofacts_data (max_pulls=None):
     for schema_file in list_all_schemas("schemas"):
-        schema_file_path = 'schemas/' + schema_file
-        print("loading metadata from ", schema_file_path)
-        with open(schema_file_path) as schema_file_object:
-            meta_json = json.load(schema_file_object)
-            print("retrieving associated data")
-            pull_json_tables(meta_json, max_pulls=max_pulls)
+        if not (schema_file == 'TRI_Onsite_Treatment_Energy_Recovery_and_Recycling_Methods.json'):
+            schema_file_path = 'schemas/' + schema_file
+            print("loading metadata from ", schema_file_path)
+            with open(schema_file_path) as schema_file_object:
+                meta_json = json.load(schema_file_object)
+                pull_json_tables(meta_json,
+                                 max_pulls=max_pulls,
+                                 directory=(os.path.splitext(schema_file)[0] + "/"))
     print("done pulling envirofacts data")
 
 

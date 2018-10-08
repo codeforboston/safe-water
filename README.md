@@ -11,8 +11,9 @@ We are using Python for the analysis and are in the early stages.
 - we will have alot of tables now, can we make sure that the raw data is somehow being grouped into useful subsets
 - how can we join and aggreate data so that we dont always have to navigate  
 - parallel-ize scripts so that general users could potentially pull scritps
+- additional print out info to better understand were we are in the scripts
 
-## running on your machine
+## running scripts on your machine
 (instructions only tested on solus linux but should hold on other os')
 in the command line cd to the safe water directory
 run the command 'python3.6 -i swid-db-scraper.py'
