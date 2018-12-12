@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 ## the original webscraper depended on the schemas scraped from the web inorder to
 ## determine which values it should query the xml responses for. This caused problems
 ## when the schemas where either unreliable or had slight language descrepancies between the
@@ -18,15 +20,28 @@ import csv
 import os
 import logging
 import multiprocessing as multi
+import argparse
 
-#from multiprocessing import Manager
 from xml.etree import ElementTree
 
+parser = argparse.ArgumentParser(description="Scrape epa goverment restful API for data using xml return and multiple processors")
+parser.add_argument('-p', '--processes', type=int,
+                    help='how many processes can scraper use to pull the data')
+parser.add_argument('-l', '--logfile', default='epa-webscraper.log',
+                    help='filename for the output file')
+parser.add_argument('-rs', '--request-size', type=int, default=10000,
+                    help='number of records to be included in each request')
+parser.add_argument('-mq', '--max-queries', type=int, default=10,
+                    help='number of times script will attempt a url before failing')
+
+
+args = parser.parse_args()
+
 # create the logger
-logger = logging.getLogger('epa-data-scraper')
+logger = logging.getLogger(args.logfile)
 logger.setLevel(logging.DEBUG)
 # create file hander which logs debug messages
-fh = logging.FileHandler('epa-webscraper.log')
+fh = logging.FileHandler(args.logfile)
 fh.setLevel(logging.DEBUG)
 
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -34,7 +49,7 @@ fh.setFormatter(formatter)
 
 logger.addHandler(fh)
 
-max_query_attempts = 10 # number of times we will try a url before giving up on it
+# max_query_attempts = 10 # number of times we will try a url before giving up on it
 def query_restful_api(url, previous_attempts):
     """Query the url and will attempt to parse the output some number of
     times before failing. meant to address occasional hiccups in service
@@ -45,7 +60,7 @@ def query_restful_api(url, previous_attempts):
         parsed_xml = ElementTree.fromstring(url_resp)
         return parsed_xml
     except ElementTree.ParseError:
-        if previous_attempts > max_query_attempts:
+        if previous_attempts > args.max_queries:
             return # how do we handle this return
         else:
             query_restful_api(url, previous_attempts + 1)
@@ -59,21 +74,8 @@ def xml_to_csv(header_list, csv_writer, xml_object, node_value_fn = lambda x: x)
         csv_writer.writerow(row_data)
 
 
-example_url =  "https://iaspub.epa.gov/enviro/efservice/ENFORCEMENT_ACTION/ROWS/0:10"
-example_response = requests.get(example_url)
-example_xml = ElementTree.fromstring(example_response.content)
-record_xml = example_xml[0]
-
-# make a query for one record and scrape headers from it
-header_example_url =  "https://iaspub.epa.gov/enviro/efservice/ENFORCEMENT_ACTION/ROWS/0:0"
-header_resp = requests.get(header_example_url)
-header_xml = ElementTree.fromstring(header_resp.content)
-headers = [node.tag for node in header_xml[0]] # down one level in the tree
-
 base_url = "https://iaspub.epa.gov/enviro/efservice/"
-table_name = "ENFORCEMENT_ACTION"
-lower_request_bound = 0
-records_to_request = 10000
+records_to_request = args.request_size
 
 def pull_table(table_name, subdir):
     base_table_url = base_url + table_name + "/ROWS/"
@@ -103,7 +105,7 @@ def pull_table(table_name, subdir):
         more_data = True
         while more_data:
             upper_req_bound = lower_req_bound + records_to_request
-            req_url = base_table_url + str(lower_req_bound) + ':' + str(upper_req_bound)
+            req_url = base_table_url + str(lower_req_bound) + ':' + str(upper_req_bound - 1)
             logger.info("querying " + req_url)
             # make request
             resp_xml = query_restful_api(req_url, 0)
@@ -126,20 +128,12 @@ sdwis_table_reference = [['WATER_SYSTEM_FACILITY', 'SDWIS'],
                          ['GEOGRAPHIC_AREA', 'SDWIS'],
                          ['SERVICE_AREA', 'SDWIS']]
 
-
-# use list comprehension to call on all the tables
-
-
 def temp_fn(x):
      pull_table(x[0], x[1])
 
 if __name__ == '__main__':
-    p = multi.Pool(processes = 4)
+    p = multi.Pool(processes = args.processes)
     p.map(temp_fn, sdwis_table_reference)
-
-#[pull_table(*sdwis_table) for sdwis_table in sdwis_table_reference]
-
-
 
 
 
