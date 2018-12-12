@@ -17,7 +17,9 @@ import logging
 import csv
 import os
 import logging
+import multiprocessing as multi
 
+#from multiprocessing import Manager
 from xml.etree import ElementTree
 
 # create the logger
@@ -126,7 +128,16 @@ sdwis_table_reference = [['WATER_SYSTEM_FACILITY', 'SDWIS'],
 
 
 # use list comprehension to call on all the tables
-[pull_table(*sdwis_table) for sdwis_table in sdwis_table_reference]
+
+
+def temp_fn(x):
+     pull_table(x[0], x[1])
+
+if __name__ == '__main__':
+    p = multi.Pool(processes = 4)
+    p.map(temp_fn, sdwis_table_reference)
+
+#[pull_table(*sdwis_table) for sdwis_table in sdwis_table_reference]
 
 
 
