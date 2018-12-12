@@ -26,8 +26,5 @@ yarn-error.log*
 
 .buildconfig
 
-# data files
-/data
-
 # jupyter notebook checkpoints
 .ipyn_checkpoints/
