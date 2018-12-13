@@ -33,6 +33,8 @@ parser.add_argument('-rs', '--request-size', type=int, default=10000,
                     help='number of records to be included in each request')
 parser.add_argument('-mq', '--max-queries', type=int, default=10,
                     help='number of times script will attempt a url before failing')
+parser.add_argument('-f', '--file', default="table-list.csv",
+                    help="file path to a csv containing two columns tablename,subdir-to-place")
 
 
 args = parser.parse_args()
@@ -70,7 +72,7 @@ def xml_to_csv(header_list, csv_writer, xml_object, node_value_fn = lambda x: x)
     # loop for all nodes in the xml
     # for each node use the header list to pull the data in the correct order
     for xml_node in xml_object:
-        row_data = [node_value_fn(xml_node.tag) for tag in header_list]
+        row_data = [node_value_fn(xml_node.find(header).text) for header in header_list]
         csv_writer.writerow(row_data)
 
 
