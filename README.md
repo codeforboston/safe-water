@@ -55,6 +55,9 @@ The web-scraper functions as a command-line program with a flag based interface.
 * -mq takes a number which maps to the number of times a url should be attemped before giving up
 
 ## Webscraping TODO
+* test parallel implementation of web scraper
+* adjust webscraper to reference file name
+* update list of databases we want beyond SWDIS databases
 * test that data read in
 * how can we join and aggreate data so that we dont always have to navigate
 * additional print out info to better understand were we are in the scripts
