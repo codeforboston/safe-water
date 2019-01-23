@@ -31,3 +31,6 @@ yarn-error.log*
 
 # jupyter notebook checkpoints
 .ipyn_checkpoints/
+
+# webscraper logs
+epa-webscraper.log

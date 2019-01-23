@@ -39,17 +39,17 @@ parser.add_argument('-f', '--file', default="table-list.csv",
 
 args = parser.parse_args()
 
-# create the logger
-logger = logging.getLogger(args.logfile)
-logger.setLevel(logging.DEBUG)
-# create file hander which logs debug messages
-fh = logging.FileHandler(args.logfile)
-fh.setLevel(logging.DEBUG)
+# # create the logger
+# logger = logging.getLogger(args.logfile)
+# logger.setLevel(logging.DEBUG)
+# # create file hander which logs debug messages
+# fh = logging.FileHandler(args.logfile)
+# fh.setLevel(logging.DEBUG)
 
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-fh.setFormatter(formatter)
+# formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# fh.setFormatter(formatter)
 
-logger.addHandler(fh)
+# logger.addHandler(fh)
 
 # max_query_attempts = 10 # number of times we will try a url before giving up on it
 def query_restful_api(url, previous_attempts):
@@ -80,6 +80,19 @@ base_url = "https://iaspub.epa.gov/enviro/efservice/"
 records_to_request = args.request_size
 
 def pull_table(table_name, subdir):
+    # create the logger
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+    # create file hander which logs debug messages
+    fh = logging.FileHandler(table_name + "-" + subdir+ ".log")
+    fh.setLevel(logging.DEBUG)
+
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
+
+    logger.addHandler(fh)
+
+
     base_table_url = base_url + table_name + "/ROWS/"
 
     # single record requested inorder to scrape headers
