@@ -28,3 +28,7 @@ yarn-error.log*
 
 # jupyter notebook checkpoints
 .ipynb_checkpoints/
+
+# scraped data
+/data/TRI_Releases_to_Environmental_Media
+/data/tri_reporting_form.log
