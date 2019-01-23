@@ -1,3 +1,4 @@
+# Safe Water
 
 This is a Code for Boston project that is trying to predict health-based drinking water violations using the Environmental Protection Agency's [Safe Drinking Water Information System](https://www.epa.gov/enviro/sdwis-model). 
 
@@ -6,6 +7,29 @@ We will explore other datasets from the EPA, including the [Toxic Release Invent
 We are using Python for the analysis and are in the early stages.
 
 Find us on our [Slack channel](https://cfb-public.slack.com) #water
+
+## Getting started
+
+The easiest way to install the Python dependencies is using Pipenv. Ensure that you have [Pipenv installed](https://pipenv.readthedocs.io/en/latest/install/), then, with the repo as your working directory, run:
+
+```bash
+pipenv install
+```
+
+To run the notebooks, run:
+
+```bash
+pipenv run jupyter notebook jupyter_notebooks
+```
+
+To add a new Python dependency, run:
+
+```bash
+pipenv install antigravity  # Replace `antigravity` with desired package name
+```
+
+Be sure to commit `Pipfile` and `Pipfile.lock` to the repo.
+
 
 ## data aggregation TODO:
 - Log files should note tables which where not collected at all for one reason or another so they can be explored further
