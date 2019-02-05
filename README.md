@@ -16,12 +16,6 @@ The easiest way to install the Python dependencies is using Pipenv. Ensure that 
 pipenv install
 ```
 
-To run the notebooks, run:
-
-```bash
-pipenv run jupyter notebook jupyter_notebooks
-```
-
 To add a new Python dependency, run:
 
 ```bash
@@ -30,6 +24,29 @@ pipenv install antigravity  # Replace `antigravity` with desired package name
 
 Be sure to commit `Pipfile` and `Pipfile.lock` to the repo.
 
+## Running the notebooks
+
+To run the notebooks, run:
+
+```bash
+pipenv run jupyter notebook jupyter_notebooks
+```
+
+## Running the scraper
+
+To run the scraper, run:
+
+```bash
+pipenv run python -i swid-db-scraper.py
+```
+
+This will load the file and put you into a command prompt. From that prompt, run the following:
+
+```python
+pull_envirofacts_data()
+```
+
+**⚠️ Note:** The scraper can take _hours_ to run.
 
 ## data aggregation TODO:
 - Log files should note tables which where not collected at all for one reason or another so they can be explored further
@@ -38,10 +55,3 @@ Be sure to commit `Pipfile` and `Pipfile.lock` to the repo.
 - how can we join and aggreate data so that we dont always have to navigate  
 - parallel-ize scripts so that general users could potentially pull scritps
 - additional print out info to better understand were we are in the scripts
-
-## running scripts on your machine
-(instructions only tested on solus linux but should hold on other os')
-in the command line cd to the safe water directory
-run the command 'python3.6 -i swid-db-scraper.py'
-this will load the file and put you into a command prompt
-now run the following command: 'pull_envirofacts_data()'
