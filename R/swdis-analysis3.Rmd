@@ -79,4 +79,45 @@ lcr_sample <- read_csv("data/swdis/LCR_SAMPLE.csv") %>%
 lcr_sample %>% head()
   
 ```
+
+```{r}
+violations <- read_csv("data/swdis/tidy/violations.csv",
+                       col_types = cols(
+  PWSID = col_character(),
+  STATE = col_factor(),
+  COUNTY_NAME = col_character(),
+  CITY = col_character(),
+  CONTAMINANT_CODE = col_factor(),
+  CONTAMINANT_NAME = col_character(),
+  CONTAMINANT_GROUP = col_character(),
+  YEAR = col_integer()
+))
+```
+
+```{r}
+violations_by_year_ma <- violations %>%
+  mutate(NAME=paste(CITY, COUNTY_NAME, STATE, sep=" - ")) %>%
+  filter(STATE=="MA") %>%
+  group_by(NAME, YEAR) %>%
+  summarize(COUNT=n())
+nrow(violations_by_year)
+violations_by_year_ma %>% head()
+```
+```{r fig.height=16}
+ggplot(violations_by_year_ma %>% head(60), aes(x=YEAR, y=COUNT)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~ NAME, ncol=3)
+
+```
+```{r}
+violations_by_year_state <- violations %>%
+  mutate(NAME=paste(CITY, COUNTY_NAME, STATE, sep=" - ")) %>%
+  group_by(STATE, YEAR) %>%
+  summarize(COUNT=n())
+
+ggplot(violations_by_year_state, aes(x=YEAR, y=COUNT)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~ NAME, ncol=3)
+```
+
 foo
