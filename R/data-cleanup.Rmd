@@ -1,0 +1,155 @@
+---
+title: "Data cleanup"
+output: html_notebook
+---
+
+---
+title: "SWDIS raw analysis"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(noncensus)
+```
+
+# Cleaning up the water systems
+
+
+Get the contaminant codes.
+
+```{r}
+contaminant_codes <- read_csv("data/swdis/contaminant-codes.csv") %>%
+  rename(CONTAMINANT_CODE=CODE, CONTAMINANT_NAME=NAME, CONTAMINANT_TYPE_CODE=TYPE_CODE)
+head(contaminant_codes)
+
+contaminant_group_codes <- read_csv("data/swdis/contaminant-group-codes.csv") %>%
+  rename(CONTAMINANT_CODE=`Analyte Code`, CONTAMINANT_NAME=`Analyte Name`, CONTAMINANT_GROUP=`Group Name`, CONTAMINANT_GROUP_CODE=`Group Code`)
+```
+
+
+Get FIPS region codes.
+
+Try to convert county fips code to a categorical data to get the county name.
+
+```{r}
+data(counties)
+
+counties2 <- counties %>%
+  mutate(fips = as.integer(paste0(state_fips, county_fips))) %>%
+  select(fips, county_name, state) %>%
+  rename(region=fips)
+counties2 %>% head()
+```
+
+```{r}
+data(zip_codes)
+
+names(zip_codes)
+
+clean_zip_codes <- zip_codes %>% select(zip, city, state, fips)
+```
+
+```{r}
+water_system <- read_csv("data/swdis/WATER_SYSTEM.csv", 
+                         col_types=cols_only(PWSID=col_character(),
+                                             POPULATION_SERVED_COUNT=col_integer(),
+                                             ORG_NAME=col_character(),
+                                             PWS_TYPE_CODE=col_factor(),
+                                             ZIP_CODE=col_character()
+                         ))
+clean_water_systems <- water_system %>%
+  na.omit() %>%
+  filter(POPULATION_SERVED_COUNT<1000000, POPULATION_SERVED_COUNT>500, PWS_TYPE_CODE=="CWS") %>%
+  inner_join(clean_zip_codes %>% select(city, fips, zip), by=c("ZIP_CODE"="zip")) %>%
+  rename(region=fips) %>%
+  left_join(counties2, by="region")
+
+clean_water_systems %>% head()
+
+violations <- read_csv("data/swdis/VIOLATION.csv",
+                       col_types = cols_only(
+  CONTAMINANT_CODE=col_character(),
+  PWSID=col_character(),
+  COMPL_PER_BEGIN_DATE=col_date(format="%d-%b-%y"),
+  COMPL_PER_END_DATE=col_date(format="%d-%b-%y"))) %>%
+  inner_join(clean_water_systems, by=c("PWSID")) %>%
+  inner_join(contaminant_group_codes, by="CONTAMINANT_CODE") %>%
+  mutate(YEAR=year(COMPL_PER_BEGIN_DATE)) %>%
+violations %>% head()
+```
+Join this with our cleaned up PWS ids.
+
+```{r}
+clean_violations <- violations %>%
+  inner_join(clean_water_system,  by="PWSID") %>%
+  inner_join(contaminant_group_codes, by="CONTAMINANT_CODE") %>%
+  mutate(YEAR=year(COMPL_PER_BEGIN_DATE)) %>%
+  select(PWSID, CONTAMINANT_CODE, CONTAMINANT_NAME, CONTAMINANT_GROUP, YEAR)
+nrow(clean_violations)
+head(clean_violations)
+```
+
+```{r hold=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+water_system_fips <- clean_water_system %>%
+  inner_join(zip_codes, by=c("ZIP_CODE"="zip")) %>%
+  rename(region=fips) %>%
+  group_by(region) %>%
+  summarize(total_pop=sum(POPULATION_SERVED_COUNT)) %>%
+  left_join(counties2, by="region")
+
+water_system_fips
+```
+
+
+
+Let's see if we get to this data by taking all the facilities labeled MWRA into account.
+
+```{r}
+mwra_systems <- water_system %>%
+  filter(grepl("MWRA", ORG_NAME))
+mwra_systems <- mwra_systems %>%
+  left_join(zip_codes, by=c("ZIP_CODE" = "zip")) %>%
+  left_join(counties2, by="fips") %>%
+  select(ORG_NAME,  county_name, POPULATION_SERVED_COUNT, PWSID)
+mwra_systems
+```
+
+```{r}
+mwra_pwsids <- mwra_systems$PWSID
+violations %>%
+  right_join(mwra_systems, by="PWSID") %>%
+  group_by(PWSID,  CONTAMINANT_CODE) %>%
+  summarize(n=n()) %>%
+  arrange(PWSID, desc(n)) %>%
+  left_join(contaminant_codes, by="CONTAMINANT_CODE") %>%
+  left_join(mwra_systems, by="PWSID") %>%
+  select(PWSID, ORG_NAME, POPULATION_SERVED_COUNT, n, CONTAMINANT_NAME) %>%
+  arrange(desc(POPULATION_SERVED_COUNT), desc(n))
+```
+
+The EWG database shows Bromodichloromethane as one of the contaminants. Do we even know about this?
+
+```{r}
+contaminant_codes %>%
+  filter(grepl(".*ROMODI.*", CONTAMINANT_NAME))
+```
+
+Let's look for bromodichloromethane violations in Massachusetts.
+
+```{r}
+violations %>%
+  filter(CONTAMINANT_CODE==2943) %>%
+  group_by(PWSID) %>%
+  summarize(n=n()) %>% 
+  left_join(water_system, by="PWSID") %>%
+  select(PWSID, ORG_NAME, POPULATION_SERVED_COUNT, ZIP_CODE, n) %>%
+  left_join(zip_codes, by=c("ZIP_CODE" = "zip"))  %>%
+  filter(state == "MA") %>%
+  arrange(desc(POPULATION_SERVED_COUNT))
+```
+
+sdfsdf

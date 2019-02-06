@@ -1,0 +1,61 @@
+---
+title: "swdis-analysis2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+library(choroplethr)
+library(choroplethrMaps)
+library(noncensus)
+```
+
+In this document, I will try to reproduce the dataset as discussed in the [National trends in drinking water quality violations](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5834717/).
+
+First, filter out water systems that have less than 500 users, and only keep CWS types.
+
+```{r}
+water_system <- read_csv("data/swdis/WATER_SYSTEM.csv", 
+                         col_types=cols_only(PWSID=col_character(),
+                                             POPULATION_SERVED_COUNT=col_integer(),
+                                             ORG_NAME=col_character(),
+                                             PWS_TYPE_CODE=col_factor(),
+                                             ZIP_CODE=col_character()
+                         ))
+clean_water_system <- water_system %>%
+  na.omit() %>%
+  filter(POPULATION_SERVED_COUNT<1000000, POPULATION_SERVED_COUNT>500, PWS_TYPE_CODE=="CWS")
+head(clean_water_system)
+
+```
+
+Read in the violations.
+
+```{r}
+violations <- read_csv("data/swdis/VIOLATION.csv",
+                       col_types = cols_only(
+  CONTAMINANT_CODE=col_character(),
+  PWSID=col_character(),
+  COMPL_PER_BEGIN_DATE=col_date(format="%d-%b-%y"),
+  COMPL_PER_END_DATE=col_date(format="%d-%b-%y")
+))
+head(violations)
+```
+
+
+```{r}
+data(zip_codes)
+
+
+violations %>%
+  right_join(clean_water_system, by="PWSID") %>%
+  full_join(zip_codes, by=c("ZIP_CODE"="zip")) %>%
+  select(fips) %>%
+  group_by(fips) %>%
+  summarize(n=n()) %>%
+  rename(region=fips, value=n) %>%
+  county_choropleth()
+```
+dfisdfsdf
