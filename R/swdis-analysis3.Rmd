@@ -87,12 +87,16 @@ violations <- read_csv("data/swdis/tidy/violations.csv",
   STATE = col_factor(),
   COUNTY_NAME = col_character(),
   CITY = col_character(),
-  CONTAMINANT_CODE = col_factor(),
+  CONTAMINANT_CODE = col_integer(),
   CONTAMINANT_NAME = col_character(),
-  CONTAMINANT_GROUP = col_character(),
-  YEAR = col_integer()
-))
+  YEAR = col_integer(),
+  BEGIN_DATE = col_date(),
+  END_DATE = col_date(),
+  DURATION_DAYS = col_integer()
+)) %>%
+  mutate(NAME=paste(CITY, COUNTY_NAME, STATE, sep=" - "))
 ```
+
 
 ```{r}
 violations_by_year_ma <- violations %>%
@@ -107,17 +111,61 @@ violations_by_year_ma %>% head()
 ggplot(violations_by_year_ma %>% head(60), aes(x=YEAR, y=COUNT)) +
   geom_bar(stat="identity") +
   facet_wrap(~ NAME, ncol=3)
-
 ```
-```{r}
+```{r, fig.height=16}
 violations_by_year_state <- violations %>%
+  filter(CONTAMINANT_CODE >= 3000, CONTAMINANT_CODE < 4000)  %>%
   mutate(NAME=paste(CITY, COUNTY_NAME, STATE, sep=" - ")) %>%
   group_by(STATE, YEAR) %>%
-  summarize(COUNT=n())
+  summarize(COUNT=sum(DURATION_DAYS))
+```
 
+```{r fig.height=16}
 ggplot(violations_by_year_state, aes(x=YEAR, y=COUNT)) +
   geom_bar(stat="identity") +
-  facet_wrap(~ NAME, ncol=3)
+  facet_wrap(~ STATE, ncol=8)
+```
+
+```{r}
+violations %>%
+  filter(STATE == "OK") %>%
+  filter(CONTAMINANT_CODE >= 3000, CONTAMINANT_CODE < 4000)  %>%
+  group_by(NAME, CONTAMINANT_NAME, YEAR) %>%
+  summarize(COUNT=n(), DAYS=sum(DURATION_DAYS)) %>%
+  arrange(desc(COUNT))
+```
+```{r}
+violations %>%
+  filter(STATE == "MA") %>%
+  arrange(desc(DURATION_DAYS))
+```
+
+```{r}
+violations %>%
+  filter(STATE == "MA") %>%
+  filter(CONTAMINANT_CODE >= 3000, CONTAMINANT_CODE < 4000)  %>%
+  group_by(NAME, CONTAMINANT_NAME, YEAR) %>%
+  summarize(COUNT=n(), DAYS=sum(DURATION_DAYS)) %>%
+  arrange(desc(COUNT))
+```
+
+```{r}
+clean_water_systems %>%
+  group_by(STATE) %>%
+  summarize(n=n()) %>%
+  arrange(desc(n))
+```
+
+```{r}
+violations %>%
+  filter(STATE == "OK") %>%
+  filter(CONTAMINANT_CODE >= 3000, CONTAMINANT_CODE < 4000) 
+  
+
+  ```
+
+```{r}
+contaminant_codes
 ```
 
 foo

@@ -27,7 +27,7 @@ Get the contaminant codes.
 ```{r}
 contaminant_codes <- read_csv("data/swdis/contaminant-codes.csv",
                               col_types=cols(
-  CODE = col_factor(),
+  CODE = col_integer(),
   NAME = col_character(),
   SCIENTIFIC_NAME = col_character(),
   TYPE_CODE = col_factor()
@@ -37,11 +37,19 @@ head(contaminant_codes)
 
 contaminant_group_codes <- read_csv("data/swdis/contaminant-group-codes.csv",
                                     col_types=cols(
-  CONTAMINANT_CODE = col_factor(),
+  CONTAMINANT_CODE = col_integer(),
   CONTAMINANT_NAME = col_character(),
   CONTAMINANT_GROUP = col_character(),
   CONTAMINANT_GROUP_CODE = col_factor()
 ))
+```
+
+```{r}
+sort(unique(contaminant_group_codes$CONTAMINANT_CODE))
+```
+
+```{r}
+sort(unique(contaminant_codes$CONTAMINANT_CODE))
 ```
 
 
@@ -87,16 +95,21 @@ clean_water_systems %>% head()
 
 violations <- read_csv("data/swdis/VIOLATION.csv",
                        col_types = cols_only(
-  CONTAMINANT_CODE=col_character(),
+  CONTAMINANT_CODE=col_integer(),
   PWSID=col_character(),
   COMPL_PER_BEGIN_DATE=col_date(format="%d-%b-%y"),
   COMPL_PER_END_DATE=col_date(format="%d-%b-%y"))) %>%
   inner_join(clean_water_systems, by=c("PWSID")) %>%
-  inner_join(contaminant_group_codes, by="CONTAMINANT_CODE") %>%
+  left_join(contaminant_codes, by="CONTAMINANT_CODE") %>%
   mutate(YEAR=year(COMPL_PER_BEGIN_DATE)) %>%
-  select(PWSID, STATE, COUNTY_NAME, CITY, CONTAMINANT_CODE, CONTAMINANT_NAME, CONTAMINANT_GROUP, YEAR)
+  rename(BEGIN_DATE=COMPL_PER_BEGIN_DATE, END_DATE=COMPL_PER_END_DATE) %>%
+  mutate(DURATION_DAYS=(END_DATE - BEGIN_DATE)) %>%
+  select(PWSID, STATE, COUNTY_NAME, CITY, CONTAMINANT_CODE, CONTAMINANT_NAME, YEAR, BEGIN_DATE, END_DATE, DURATION_DAYS)
 
 violations %>% head()
+```
+```{r}
+sort(unique(violations$CONTAMINANT_CODE))
 ```
 
 Write it back out to csv
