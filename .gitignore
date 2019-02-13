@@ -33,4 +33,6 @@ yarn-error.log*
 .ipynb_checkpoints/
 
 # webscraper logs
-epa-webscraper.log
+epa-webscraper.log 
+
+.Rproj.user
