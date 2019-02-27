@@ -1,0 +1,27 @@
+site_name: 'Safe Water'
+theme:
+  name: 'material'
+  logo: 'images/potablewater.svg'
+  language: 'en'
+  palette:
+    primary: 'blue'
+    accent: 'blue'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+repo_name: 'codeforboston/safe-water'
+repo_url: 'https://github.com/codeforboston/safe-water'
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+nav:
+  - Home: index.md
+  - 'Getting Started': getting-started.md
+  - 'Contributing': contributing.md
+  - Data:
+    - 'Data Format': data/data-format.md
+    - 'Web Scraper': data/web-scraper.md
+  - 'Additional Links': additional-links.md
