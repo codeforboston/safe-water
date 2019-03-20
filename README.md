@@ -1,4 +1,4 @@
-# Safe Water
+# Safe Water 🚰
 
 ## Context
 
@@ -40,5 +40,10 @@ We are using [python](http://python.org) with [pandas](https://pandas.pydata.org
 although some people are using [R](https://www.r-project.org/) as well.
 
 ## Getting Started
+- The slack pinned items are a really good way to get started. Scroll through them to get more context about what we are doing. 
+- Take a look at the ``docs/`` folder for the next steps and technical setup.
 
-Take a look at the ``docs/`` folder for the next steps and technical setup.
+## Things move fast
+
+This documentation is a living thing. Fork and propose your update 🙏
+  
