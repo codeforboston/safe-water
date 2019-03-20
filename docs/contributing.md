@@ -1,12 +1,5 @@
 # Contributing
 
-!!! tip
-    * Find us on our [Slack channel](https://cfb-public.slack.com) #water.
-    * Join our [Trello board](https://trello.com/b/qP7oYyWn/safe-water).
-
-We are using [python](http://python.org) with [pandas](https://pandas.pydata.org/),
-although some people are using [R](https://www.r-project.org/) as well.
-
 ## Github repository
 
 Fork and clone our github repository at [codeforboston/safe-water](http://github.com/codeforboston/safe-water).
