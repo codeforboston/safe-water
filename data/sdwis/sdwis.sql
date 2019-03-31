@@ -277,6 +277,26 @@ alter table ENFORCEMENT_ACTION
 		primary key (ID);
 
 
+/*
+ * CONTAMINANT_CODES Table
+*/
+
+create table CONTAMINANT_CODES
+(
+	CODE VARCHAR(4) not null,
+	NAME TEXT null,
+	SCIENTIFIC_NAME TEXT null,
+	TYPE_CODE VARCHAR(3) null
+);
+
+create unique index `contaminant-codes_CODE_uindex`
+	on CONTAMINANT_CODES (CODE);
+
+alter table CONTAMINANT_CODES
+	add constraint `contaminant-codes_pk`
+		primary key (CODE);
+
+
 /**/
 
 CREATE TABLE IF NOT EXISTS sdwis.ENFORCEMENT_ACTION (
