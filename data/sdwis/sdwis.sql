@@ -289,12 +289,33 @@ create table CONTAMINANT_CODES
 	TYPE_CODE VARCHAR(3) null
 );
 
-create unique index `contaminant-codes_CODE_uindex`
+create unique index CONTAMINANT_CODES_CODE_uindex
 	on CONTAMINANT_CODES (CODE);
 
 alter table CONTAMINANT_CODES
-	add constraint `contaminant-codes_pk`
+	add constraint CONTAMINANT_CODES
 		primary key (CODE);
+
+/*
+ * CONTAMINANT_GROUP_CODES Table
+ */
+
+create table CONTAMINANT_GROUP_CODES
+(
+	CONTAMINANT_CODE VARCHAR(4) not null,
+	ID VARCHAR(36) not null,
+	CONTAMINANT_NAME TEXT null,
+	CONTAMINANT_GROUP TEXT null,
+	CONTAMINANT_GROUP_CODE VARCHAR(4) not null
+);
+
+create unique index CONTAMINANT_GROUP_CODES_ID_uindex
+	on CONTAMINANT_GROUP_CODES (ID);
+
+alter table CONTAMINANT_GROUP_CODES
+	add constraint CONTAMINANT_GROUP_CODES_pk
+		primary key (ID);
+
 
 
 /**/
