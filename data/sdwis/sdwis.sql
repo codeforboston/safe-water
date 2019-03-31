@@ -195,6 +195,61 @@ alter table SERVICE_AREA
 	add constraint SERVICE_AREA_pk
 		primary key (ID);
 
+/*
+ * Geographic Area table
+ */
+
+ create table GEOGRAPHIC_AREA
+(
+	PWSID VARCHAR(9) not null,
+	GEO_ID INT not null,
+	PRIMACY_AGENCY_CODE TEXT null,
+	EPA_REGION INT null,
+	PWS_ACTIVITY_CODE TEXT null,
+	PWS_TYPE_CODE TEXT null,
+	TRIBAL_CODE TEXT null,
+	STATE_SERVED TEXT null,
+	ANSI_ENTITY_CODE TEXT null,
+	ZIP_CODE_SERVED TEXT null,
+	CITY_SERVED TEXT null,
+	AREA_TYPE_CODE TEXT null,
+	COUNTY_SERVED TEXT null,
+	constraint DG_GEOGRAPHIC_AREA_WATER_SYSTEM_PWSID_fk
+		foreign key (PWSID) references WATER_SYSTEM (PWSID)
+);
+
+create unique index DG_GEOGRAPHIC_AREA_GEO_ID_uindex
+	on DG_GEOGRAPHIC_AREA (GEO_ID);
+
+alter table GEOGRAPHIC_AREA
+	add constraint DG_GEOGRAPHIC_AREA_pk
+		primary key (GEO_ID);
+
+/*
+* ENFORCEMENT_ACTION table
+*/
+
+create table ENFORCEMENT_ACTION
+(
+	PWSID VARCHAR(9) null,
+	ID VARCHAR(36) not null,
+	ENFORCEMENT_ID INT null,
+	ORIGINATOR_CODE VARCHAR(1) null,
+	ENFORCEMENT_DATE DATE null,
+	ENFORCEMENT_ACTION_TYPE_CODE VARCHAR(3) null,
+	ENFORCEMENT_COMMENT_TEXT TEXT null,
+	constraint ENFORCEMENT_ACTION_WATER_SYSTEM_PWSID_fk
+		foreign key (PWSID) references WATER_SYSTEM (PWSID)
+);
+
+create unique index ENFORCEMENT_ACTION_ID_uindex
+	on ENFORCEMENT_ACTION (ID);
+
+alter table ENFORCEMENT_ACTION
+	add constraint ENFORCEMENT_ACTION_pk
+		primary key (ID);
+
+
 /**/
 
 CREATE TABLE IF NOT EXISTS sdwis.ENFORCEMENT_ACTION (
