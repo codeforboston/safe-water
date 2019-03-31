@@ -316,7 +316,9 @@ alter table CONTAMINANT_GROUP_CODES
 	add constraint CONTAMINANT_GROUP_CODES_pk
 		primary key (ID);
 
-
+/*
+* LCR_SAMPLE Table
+*/
 
 /**/
 
