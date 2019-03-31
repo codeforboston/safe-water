@@ -120,7 +120,7 @@ create table VIOLATION
 (
 	PWSID TEXT null,
 	ID VARCHAR(36) not null,
-	VIOLATION_ID VARCHAR(20) null,
+	VIOLATION_ID VARCHAR(20) not null,
 	FACILITY_ID VARCHAR(12) null,
 	POPULATION_SERVED_COUNT INT null,
 	NPM_CANDIDATE TEXT null,
@@ -155,6 +155,9 @@ create table VIOLATION
 	RULE_FAMILY_CODE VARCHAR(3) null
 );
 
+create index VIOLATION_ID_INDEX
+	on VIOLATION (VIOLATION_ID);
+
 create unique index VIOLATION_ID_uindex
 	on VIOLATION (ID);
 
@@ -167,6 +170,27 @@ alter table VIOLATION
 /*
  * VIOLATION_ENF_ASSOC Table
  */
+
+create table VIOLATION_ENF_ASSOC
+(
+	PWSID VARCHAR(9) not null,
+	ID VARCHAR(36) not null,
+	ENFORCEMENT_ID INT not null,
+	VIOLATION_ID VARCHAR(20) not null,
+	constraint VIOLATION_ENF_ASSOC___fk_ENF
+		foreign key (ENFORCEMENT_ID) references ENFORCEMENT_ACTION (ENFORCEMENT_ID),
+	constraint VIOLATION_ENF_ASSOC___fk_PWSID
+		foreign key (PWSID) references WATER_SYSTEM (PWSID),
+	constraint VIOLATION_ENF_ASSOC___fk_VIOLATION
+		foreign key (VIOLATION_ID) references VIOLATION (VIOLATION_ID)
+);
+
+create unique index VIOLATION_ENF_ASSOC_ID_uindex
+	on VIOLATION_ENF_ASSOC (ID);
+
+alter table VIOLATION_ENF_ASSOC
+	add constraint VIOLATION_ENF_ASSOC_pk
+		primary key (ID);
 
 
  /*
@@ -233,7 +257,7 @@ create table ENFORCEMENT_ACTION
 (
 	PWSID VARCHAR(9) null,
 	ID VARCHAR(36) not null,
-	ENFORCEMENT_ID INT null,
+	ENFORCEMENT_ID INT not null,
 	ORIGINATOR_CODE VARCHAR(1) null,
 	ENFORCEMENT_DATE DATE null,
 	ENFORCEMENT_ACTION_TYPE_CODE VARCHAR(3) null,
@@ -241,6 +265,9 @@ create table ENFORCEMENT_ACTION
 	constraint ENFORCEMENT_ACTION_WATER_SYSTEM_PWSID_fk
 		foreign key (PWSID) references WATER_SYSTEM (PWSID)
 );
+
+create index ENFORCEMENT_ACTION_ENFO_ID
+	on ENFORCEMENT_ACTION (ENFORCEMENT_ID);
 
 create unique index ENFORCEMENT_ACTION_ID_uindex
 	on ENFORCEMENT_ACTION (ID);
