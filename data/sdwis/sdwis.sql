@@ -164,8 +164,38 @@ alter table VIOLATION
 
 
 
+/*
+ * VIOLATION_ENF_ASSOC Table
+ */
 
 
+ /*
+ * SERVICE AREA Table
+ */
+
+
+create table SERVICE_AREA
+(
+	PWSID VARCHAR(9) not null,
+	ID VARCHAR(36) not null,
+	PRIMACY_AGENCY_CODE TEXT null,
+	EPA_REGION INT null,
+	PWS_ACTIVITY_CODE TEXT null,
+	PWS_TYPE_CODE TEXT null,
+	SERVICE_AREA_TYPE_CODE TEXT null,
+	IS_PRIMARY_SERVICE_AREA_CODE TEXT null,
+	constraint SERVICE_AREA_WATER_SYSTEM_PWSID_fk
+		foreign key (PWSID) references WATER_SYSTEM (PWSID)
+);
+
+create unique index SERVICE_AREA_ID_uindex
+	on SERVICE_AREA (ID);
+
+alter table SERVICE_AREA
+	add constraint SERVICE_AREA_pk
+		primary key (ID);
+
+/**/
 
 CREATE TABLE IF NOT EXISTS sdwis.ENFORCEMENT_ACTION (
 	ENFORCEMENT_ACTION_TYPE_CODE VARCHAR(4),
