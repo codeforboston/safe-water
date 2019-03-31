@@ -320,6 +320,54 @@ alter table CONTAMINANT_GROUP_CODES
 * LCR_SAMPLE Table
 */
 
+create table LCR_SAMPLE
+			(
+			SAMPLE_ID TEXT not null,
+			ID VARCHAR(36) not null,
+			PWSID VARCHAR(9) not null,
+			SAMPLING_END_DATE DATE null,
+			SAMPLING_START_DATE DATE null,
+			PRIMACY_AGENCY_CODE VARCHAR(2) null,
+			EPA_REGION INT null,
+			constraint LCR_SAMPLE_WATER_SYSTEM_PWSID_fk
+			foreign key (PWSID) references WATER_SYSTEM (PWSID)
+			);
+create unique index LCR_SAMPLE_ID_uindex
+			on LCR_SAMPLE (ID);
+
+alter table LCR_SAMPLE
+			add constraint LCR_SAMPLE_pk
+			primary key (ID);
+
+
+/*
+* LCR_SAMPLE_RESULT Table
+*/
+
+create table DG_LCR_SAMPLE_RESULT
+(
+	PWSID VARCHAR(9) not null,
+	SAMPLE_ID TEXT not null,
+	PRIMACY_AGENCY_CODE VARCHAR(2) not null,
+	EPA_REGION INT not null,
+	SAR_ID INT not null,
+	CONTAMINANT_CODE VARCHAR(4) not null,
+	RESULT_SIGN_CODE VARCHAR(1) null,
+	SAMPLE_MEASURE FLOAT null,
+	UNIT_OF_MEASURE TEXT null,
+	constraint DG_LCR_SAMPLE_RESULT_WATER_SYSTEM_PWSID_fk
+		foreign key (PWSID) references WATER_SYSTEM (PWSID)
+);
+
+create unique index DG_LCR_SAMPLE_RESULT_SAR_ID_uindex
+	on DG_LCR_SAMPLE_RESULT (SAR_ID);
+
+alter table DG_LCR_SAMPLE_RESULT
+	add constraint DG_LCR_SAMPLE_RESULT_pk
+		primary key (SAR_ID);
+
+
+
 /**/
 
 CREATE TABLE IF NOT EXISTS sdwis.ENFORCEMENT_ACTION (
