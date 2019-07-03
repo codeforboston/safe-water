@@ -6,6 +6,8 @@ The Safe Drinking Water Project is a team of volunteers at [Code for Boston](htt
 
 Representatives for nonprofit organizations and government agencies interested in our work should contact Andrew at andrew@codeforboston.org. Please feel free to also join our Slack channel at Code for Boston and meet the team.
 
+The [Conservation Law Foundation](https://www.clf.org/) has expressed interest in this project, and we are excited to hear from other organizations who are also interested.
+
 ## Our Work
 
 We are interested in data that helps identify hazardous drinking water. Our analyses primarily utilize the Environmental Protection Agency's (EPA) [Safe Drinking Water Information System](https://www.epa.gov/enviro/sdwis-overview) (SDWIS) as our violations data; this data contains information about drinking water violations for public water systems across the United States. In addition to SDWIS, we are interested in any data that may help better predict drinking water violations when combined with violations data, such as [rainfall data](https://www.ncdc.noaa.gov/cdo-web/webservices/v2) and [demographic data](https://www.census.gov/developers/).
