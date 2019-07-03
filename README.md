@@ -1,49 +1,30 @@
-# Safe Water 🚰
+# Safe Drinking Water Project 🚰
 
-## Context
+The Safe Drinking Water Project is a team of volunteers at [Code for Boston](https://www.codeforboston.org/) who are using data modeling and machine learning to predict the presence of hazardous drinking water contaminants in the United States. Our goals are to identify at-risk communities, hazards posed by emerging contaminants, and other health concerns related to contamination of drinking water.
 
-This is a Code for Boston project that is trying to predict
-health-based drinking water violations using the
-Environmental Protection Agency's
-[Safe Drinking Water Information System](https://www.epa.gov/enviro/sdwis-model).
+### We are interested in collaborating with health and environmental organizations.
 
+Representatives for nonprofit organizations and government agencies interested in our work should contact Andrew at andrew@codeforboston.org. Please feel free to also join our Slack channel at Code for Boston and meet the team.
 
-This project will analyze data from the EPA’s Safe Drinking Water Information System
-and then integrate other data sets to try to predict health-based drinking water
-violations in the United States.
-The [Conservation Law Foundation](https://www.clf.org/) has expressed interest in this project.
-They might be a potential long-term partner. 
+## Our Work
 
-## Possible datasets
+We are interested in data that helps identify hazardous drinking water. Our analyses primarily utilize the Environmental Protection Agency's (EPA) [Safe Drinking Water Information System](https://www.epa.gov/enviro/sdwis-overview) (SDWIS) as our violations data; this data contains information about drinking water violations for public water systems across the United States. In addition to SDWIS, we are interested in any data that may help better predict drinking water violations when combined with violations data, such as [rainfall data](https://www.ncdc.noaa.gov/cdo-web/webservices/v2) and [demographic data](https://www.census.gov/developers/).
 
-At first we start by considering one dataset.
-[Safe Drinking Water Information System](https://www.epa.gov/enviro/sdwis-model).
+Most volunteers work in [python](http://python.org) with [pandas](https://pandas.pydata.org/). Some volunteers also use [R](https://www.r-project.org/).
 
+## Project Materials and Communications
 
-In a second time, we will explore other datasets from the EPA,
-including, but not limited to:
-
-* the [Toxic Release Inventory database](https://www.epa.gov/enviro/tri-search),
-* the [Superfund Enterprise Management System](https://www.epa.gov/enviro/sems-search),
-* the [Environmental Radiation Monitoring database](https://www.epa.gov/radnet),
-* the [Enforcement and Compliance History Outline](https://echo.epa.gov/). 
-
-(Feel free to add link to new interesting datasets here)
+- [Slack channel](https://cfb-public.slack.com): #water
+  - [Join Code for Boston's Slack Workplace](https://communityinviter.com/apps/cfb-public/code-for-boston)
+- [Trello - Project Board](https://trello.com/b/qP7oYyWn/safe-water)
+- [Google Drive - Notes and Research](https://drive.google.com/drive/folders/1FbQE9_NP664lkz4d-Xu4omijLl-HNklz)
 
 ## Join Us
 
-- Find us on our [Slack channel](https://cfb-public.slack.com) #water.
-- Join our [Trello board](https://trello.com/b/qP7oYyWn/safe-water). We use Trello as a project management tool to track tasks in a Kanban.
-- We also have a [google drive](https://drive.google.com/drive/folders/1FbQE9_NP664lkz4d-Xu4omijLl-HNklz) folder with various documentation.
+If you are interested in volunteering for the Safe Drinking Water Project:
 
-We are using [python](http://python.org) with [pandas](https://pandas.pydata.org/),
-although some people are using [R](https://www.r-project.org/) as well.
+- __Join the Slack.__ The #water channel has various pinned items that will be of use for getting started.
 
-## Getting Started
-- The slack pinned items are a really good way to get started. Scroll through them to get more context about what we are doing. 
-- Take a look at the ``docs/`` folder for the next steps and technical setup.
+- __Read the docs.__ The ``docs/`` folder contains more information about the project, plus steps on how to set up the project so you can start contributing. See the [Getting Started](docs/getting-started.md) documentation for more information.
 
-## Things move fast
-
-This documentation is a living thing. Fork and propose your update 🙏
-  
+- __Meet us on Tuesday nights.__ We would love to meet you! We meet alongside other Code for Boston teams every Tuesday in Kendall Square, Cambridge, MA. [Sign up to attend Code for Boston events here](https://www.meetup.com/Code-for-Boston/).
