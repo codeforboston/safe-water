@@ -6,19 +6,19 @@ In addition to technology requirements, there are some data requirements. If you
 
 ## Technology
 
-#### Python
+### Python
 
 Download the latest version of Python [here](https://www.python.org/downloads/). Alternatively, you may be interested in downloading [Anaconda](https://www.anaconda.com/distribution/), which is a distribution of Python that comes with tons of data science tools pre-installed. You can read more about different Python distributions and their pros and cons [here](https://www.infoworld.com/article/3267976/anaconda-cpython-pypy-and-more-know-your-python-distributions.html). If you need additional help getting started in Python, check out [this guide](https://wiki.python.org/moin/BeginnersGuide).
 
-#### Git and Github
+### Git / GitHub
 
 Download Git [here](https://git-scm.com/downloads). If you're new to GitHub, after you create an account, go through [GitHub's Hello World tutorial](https://guides.github.com/activities/hello-world/). After that, you will need to learn how to fork the safe-water repo; you can learn how to do that by following GitHub's [Fork a repo](https://help.github.com/articles/fork-a-repo/) tutorial.
 
-#### MySQL Server
+### MySQL Server
 
 MySQL Server is not a prerequisite for making contributions to this project, but it will be easier to run many of the contributions by others in this project if you have it installed. You can download it [here](https://dev.mysql.com/downloads/mysql/).
 
-#### R and Dependencies
+### R
 
 R is not a prerequisite for making contributions to this project, although some users in the past have used R, and we do not discourage volunteers from making contributions in R if they are more comfortable working in R. You can download R [here](https://cran.r-project.org/), and RStudio (an IDE for R) [here](https://www.rstudio.com/products/rstudio/download/).
 
@@ -51,7 +51,7 @@ git checkout master
 
 ## Dependencies
 
-#### Python Dependencies
+### Python Dependencies
 
 The easiest way to install the Python dependencies is using Pipenv. Ensure that you have [Pipenv installed](https://pipenv.readthedocs.io/en/latest/install/), then, with the repo as your working directory, run:
 
@@ -67,7 +67,7 @@ pipenv install antigravity  # Replace `antigravity` with desired package name
 
 Be sure to commit `Pipfile` and `Pipfile.lock` to the repo.
 
-#### R Dependencies
+### R Dependencies
 
 Install the following packages:
 
