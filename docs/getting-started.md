@@ -1,5 +1,7 @@
 # Getting Started
 
+This document explains all of the technology and data requirements to begin replicating and contributing to the project.
+
 The Safe Water Project is currently being developed in Python. Some project contributors have utilized MySQL to import data into pandas in their Jupyter notebooks, and historically we have had contributions done in R.
 
 In addition to technology requirements, there are some data requirements. If you already have all the technology requirements and know how to fork a repo, you can skip down to the __Data__ section.
@@ -31,8 +33,7 @@ R is not a prerequisite for making contributions to this project, although some 
 3. Clone your fork. Navigate to a folder you would like to place this project, then type:
 
 ```bash
-git clone
-https://github.com/YOUR-USERNAME/safe-water.git
+git clone https://github.com/<YOUR-USERNAME>/safe-water.git
 cd safe-water
 ```
 
@@ -43,7 +44,7 @@ git remote add upstream
 https://github.com/codeforboston/safe-water.git
 ```
 
-4. Checkout the master branch:
+5. Checkout the master branch:
 
 ```bash
 git checkout master
