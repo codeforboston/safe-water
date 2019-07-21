@@ -17,6 +17,9 @@ A class of emerging contaminants added to the EPA's list of contaminents to be m
 
 There are 6 contaminents the EPA is monitoring that in the PFAS family: perfluorooctanesulfonic acid (PFOS), perfluorooctanoic acid (PFOA), perfluorononanoic acid (PFNA), perfluorohexanesulfonic acid (PFHxS), perfluoroheptanoic acid (PFHpA), and perfluorobutanesulfonic acid (PFBS). ([EPA](https://www.epa.gov/pfas)) ([Wikipedia](https://en.wikipedia.org/wiki/Perfluorooctanoic_acid))
 
+###  Public Water System Supervision (PWSS)
+A program administered by the EPA which allocates grant money to assist states in monitoring their public water systems. All states and territories receive this grant money (i.e. receive primacy) except for Wyoming and Washington D.C. The only tribal nation to receive primacy is the Navajo Nation. In areas where the state does not have primacy, the allocated funds are instead used by the EPA in that region instead of being used by the state. ([EPA](https://www.epa.gov/dwreginfo/public-water-system-supervision-pwss-grant-program))
+
 ### Safe Drinking Water Act (SDWA)
 An act passed by Congress and enacted in 1974 that provides a regulatory framework at the federal level for public water systems across the United States. It grants the EPA the authority to enact national primary drinking water regulations (NPDWRs) which either establish a maximum contaminant level (MCL) or a treatment technique "to prevent known or anticipated adverse effects on the health of persons to the extent feasible." ([Wikipedia](https://en.wikipedia.org/wiki/Safe_Drinking_Water_Act))
 

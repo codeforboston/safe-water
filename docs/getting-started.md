@@ -12,6 +12,24 @@ In addition to technology requirements, there are some data requirements. If you
 
 Download the latest version of Python [here](https://www.python.org/downloads/). Alternatively, you may be interested in downloading [Anaconda](https://www.anaconda.com/distribution/), which is a distribution of Python that comes with tons of data science tools pre-installed. You can read more about different Python distributions and their pros and cons [here](https://www.infoworld.com/article/3267976/anaconda-cpython-pypy-and-more-know-your-python-distributions.html). If you need additional help getting started in Python, check out [this guide](https://wiki.python.org/moin/BeginnersGuide).
 
+### Jupyter Notebook
+
+Most of the Python coding is being done in Jupyter notebooks, which are documents that execute code in small chunks and visualizes the outputs, all in one window. Jupyter comes with Anaconda by default; if you are using another distribution of Python, install Jupyter in the command line with:
+
+```bash
+pip install jupyter
+```
+
+To open up Jupyter after it is installed, in command line, run:
+
+```bash
+jupyter notebook
+```
+
+Alternatively, you can open up any `.ipynb` file with `jupyter-notebook.exe`, inside your Python's scripts folder.
+
+If you want to learn more about Jupyter Notebook, check out [this tutorial](https://www.dataquest.io/blog/jupyter-notebook-tutorial/).
+
 ### Git / GitHub
 
 Download Git [here](https://git-scm.com/downloads). If you're new to GitHub, after you create an account, go through [GitHub's Hello World tutorial](https://guides.github.com/activities/hello-world/). After that, you will need to learn how to fork the safe-water repo; you can learn how to do that by following GitHub's [Fork a repo](https://help.github.com/articles/fork-a-repo/) tutorial.
@@ -28,23 +46,21 @@ R is not a prerequisite for making contributions to this project, although some 
 
 1. On GitHub, navigate to the [repository](https://github.com/codeforboston/safe-water/). In the top-right corner of the page, click Fork.
 
-2. On GitHub, navigate to your fork of the safe-water repository. In the Clone with HTTPs section, click to copy the clone URL for the repository.
-
-3. Clone your fork. Navigate to a folder you would like to place this project, then type:
+2. Clone your fork. Navigate to a folder you would like to place this project, then type:
 
 ```bash
 git clone https://github.com/<YOUR-USERNAME>/safe-water.git
 cd safe-water
 ```
 
-4. Add the safe-water repository as a remote to your fork:
+3. Add the safe-water repository as a remote to your fork:
 
 ```bash
 git remote add upstream
 https://github.com/codeforboston/safe-water.git
 ```
 
-5. Checkout the master branch:
+4. Checkout the master branch:
 
 ```bash
 git checkout master
