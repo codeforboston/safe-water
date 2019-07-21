@@ -27,6 +27,6 @@ If you are interested in volunteering for the Safe Drinking Water Project:
 
 - __Join the Slack.__ The #water channel has various pinned items that will be of use for getting started.
 
-- __Read the docs.__ The ``docs/`` folder contains more information about the project, plus steps on how to set up the project so you can start contributing. See the [Getting Started](docs/getting-started.md) documentation for more information.
+- __Read the docs.__ The ``docs/`` folder contains more information about the project, plus steps on how to set up the project so you can start contributing. [Click here](docs/) for the docs.
 
 - __Meet us on Tuesday nights.__ We would love to meet you! We meet alongside other Code for Boston teams every Tuesday in Kendall Square, Cambridge, MA. [Sign up to attend Code for Boston events here](https://www.meetup.com/Code-for-Boston/).

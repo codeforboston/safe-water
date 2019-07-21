@@ -1,5 +1,7 @@
 # Getting Started
 
+This document explains all of the technology and data requirements to begin replicating and contributing to the project.
+
 The Safe Water Project is currently being developed in Python. Some project contributors have utilized MySQL to import data into pandas in their Jupyter notebooks, and historically we have had contributions done in R.
 
 In addition to technology requirements, there are some data requirements. If you already have all the technology requirements and know how to fork a repo, you can skip down to the __Data__ section.
@@ -9,6 +11,24 @@ In addition to technology requirements, there are some data requirements. If you
 ### Python
 
 Download the latest version of Python [here](https://www.python.org/downloads/). Alternatively, you may be interested in downloading [Anaconda](https://www.anaconda.com/distribution/), which is a distribution of Python that comes with tons of data science tools pre-installed. You can read more about different Python distributions and their pros and cons [here](https://www.infoworld.com/article/3267976/anaconda-cpython-pypy-and-more-know-your-python-distributions.html). If you need additional help getting started in Python, check out [this guide](https://wiki.python.org/moin/BeginnersGuide).
+
+### Jupyter Notebook
+
+Most of the Python coding is being done in Jupyter notebooks, which are documents that execute code in small chunks and visualizes the outputs, all in one window. Jupyter comes with Anaconda by default; if you are using another distribution of Python, install Jupyter in the command line with:
+
+```bash
+pip install jupyter
+```
+
+To open up Jupyter after it is installed, in command line, run:
+
+```bash
+jupyter notebook
+```
+
+Alternatively, you can open up any `.ipynb` file with `jupyter-notebook.exe`, inside your Python's scripts folder.
+
+If you want to learn more about Jupyter Notebook, check out [this tutorial](https://www.dataquest.io/blog/jupyter-notebook-tutorial/).
 
 ### Git / GitHub
 
@@ -26,17 +46,14 @@ R is not a prerequisite for making contributions to this project, although some 
 
 1. On GitHub, navigate to the [repository](https://github.com/codeforboston/safe-water/). In the top-right corner of the page, click Fork.
 
-2. On GitHub, navigate to your fork of the safe-water repository. In the Clone with HTTPs section, click to copy the clone URL for the repository.
-
-3. Clone your fork. Navigate to a folder you would like to place this project, then type:
+2. Clone your fork. Navigate to a folder you would like to place this project, then type:
 
 ```bash
-git clone
-https://github.com/YOUR-USERNAME/safe-water.git
+git clone https://github.com/<YOUR-USERNAME>/safe-water.git
 cd safe-water
 ```
 
-4. Add the safe-water repository as a remote to your fork:
+3. Add the safe-water repository as a remote to your fork:
 
 ```bash
 git remote add upstream
