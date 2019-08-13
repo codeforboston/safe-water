@@ -58,7 +58,3 @@ The Government Accountability Office (GAO) has a [comprehensive report](https://
 - In 2009, 84% of monitoring violations were inaccurately reported or not reported in SDWIS/Fed. (p. 16)
 - The EPA does not check the quality of the data it receives from state agencies. (p. 17)
 - EPA's routine estimates of the completeness and accuracy of SDWIS/Fed are based on a comparison of it and SDWIS/State, not based on original source documents, so if both data sets are inaccurate but consistent with one another, a violation may be inaccurately reported or not reported. (pp. 17-18)
-
-http://healthjournalism.org/resources-articles-details.php?id=363#.V219ErgrI2y
-https://www.gao.gov/products/GAO-11-381
-https://www.jstor.org/stable/26327512

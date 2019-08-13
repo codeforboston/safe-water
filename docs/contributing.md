@@ -36,7 +36,23 @@ When providing code contributions for analyses, code should be documented and re
 
 ### Data Collection and Cleaning Contributions
 
-At the moment, our code to collect large data is contained in `code/python/scraper`; a lot of smaller data collection tasks are located across various notebooks in `code/python/notebook`.
+Contributing data is an especially valuable way to contribute to this project.
+
+Useful data for this project generally falls into two categories:
+
+- __Features.__ Otherwise known as explanatory variables, predictors, or independent varaibles. These are data points that go into the **X** matrix parameter used to estimate violations. Features can be almost any data: as long as you believe the data may help predict violations, and it can be merged to water samples, then it can be a feature.
+- __Water samples.__ These are the observations or data points that we fit the data onto. SDWIS is the main source of water samples, although there are other sources of interest such as water samples from private wells.
+
+Here are the steps that we suggest you take to contribute features:
+
+1. **Find a feature.** There are a few ways you can do this:
+  a. Pick a feature from some documents on our Google Drive.
+  b. Discuss what you think might be useful with others.
+  c. Do some research.
+2. **Collect the data.** The data collection should be reproducible. You should document this data somewhere on the Google Drive in a place you think is appropriate. Ideally, you can record the collection of this data in whatever ``.py`` file or Jupyter notebook you use to also clean the data. (I.e. the file downloads the data and makes the whole process automated. If you're struggling with this, that's fine, just add a note in Python file on how to download the data.)
+3. **Clean the data.** Cleaning data is a broad and amorphous task, but the goal is to transform the data into something that can be used seamlessly with the rest of the data. This means transforming types (e.g. strings to floats), removing unnecessary columns, fixing bugs in the import process, addressing missing values, testing that calculated fields were calculated correctly, checking that things generally make sense with cross-tabulations. In some cases, data may be seemingly unusable because it is in a PDF file, but there are ways to import this data with a little bit of elbow grease.
+4. **Merge the data.** Once you think your feature data is cleaned, try merging it onto water samples. Generally, the data we are working with will be merged on state, city, zip code, or latitude-longitude. Temporal data can also merge to both geography and time.
+5. **Test the data, and record any issues.** Make sure the merge makes sense on an intuitive level. Did only 90% of the values merge, and not sure how to fix the rest? Did you merge some geospatial data to their nearest neighbors in the SDWIS data, but found out that some of the SDWIS data doesn't have nearest neighbors for hundreds of miles so you think this might be a gap? Keep notes of these things in your Python file. **You don't need to fix issues like this by yourself;** that's why we are working in a team. 😃 Do your best to document anything you see for either your future self or for others on the team to help fix.
 
 ## Research and Documentation Contributions
 
