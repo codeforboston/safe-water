@@ -3,22 +3,20 @@ import click
 import os
 from collections import namedtuple
 
-SDWIS_FOLDER = [
-    'contaminant-codes.csv',
-    'contaminant-group-codes.csv',
-    'ENFORCEMENT_ACTION.csv',
-    'GEOGRAPHIC_AREA.csv',
-    'LCR_SAMPLE_RESULT.csv',
-    'LCR_SAMPLE.csv',
-    'SERVICE_AREA.csv',
-    'TREATMENT.csv',
-    'VIOLATION_ENF_ASSOC.csv',
-    'VIOLATION.csv',
-    'WATER_SYSTEM_FACILITY.csv',
-    'WATER_SYSTEM.csv'
+FILE_LIST = [
+    'sdwis/contaminant-codes.csv',
+    'sdwis/contaminant-group-codes.csv',
+    'sdwis/ENFORCEMENT_ACTION.csv',
+    'sdwis/GEOGRAPHIC_AREA.csv',
+    'sdwis/LCR_SAMPLE_RESULT.csv',
+    'sdwis/LCR_SAMPLE.csv',
+    'sdwis/SERVICE_AREA.csv',
+    'sdwis/TREATMENT.csv',
+    'sdwis/VIOLATION_ENF_ASSOC.csv',
+    'sdwis/VIOLATION.csv',
+    'sdwis/WATER_SYSTEM_FACILITY.csv',
+    'sdwis/WATER_SYSTEM.csv'
 ]
-
-FILE_LIST = ['sdwis/' + fn for fn in SDWIS_FOLDER]
 
 OPTIONAL_FILES = []
 
@@ -94,25 +92,27 @@ def compare_files_and_folders(
 py_file_loc = os.path.dirname(os.path.realpath(__file__))
 
 @click.command()
-@click.option('--data_dir',
-              default=os.path.join(py_file_loc, '../../data'),
-              help="Data directory path.")
 @click.option('--files',
               default=FILE_LIST,
               help="File list to compare against what's in data_dir")
+@click.option('--data_dir',
+              default=os.path.join(py_file_loc, '../../data'),
+              help='Data directory path.')
 @click.option('--optional_files',
               default=OPTIONAL_FILES,
-              help="Files that are not considered extra files but also not required.")
+              help='Files that are not considered extra files but also not required.')
 @click.option('--return_correct',
               default=False,
-              help="Return list of files that match.")
+              help='Return list of files that match.')
 @click.option('--return_optional',
               default=False,
-              help="Return list of optional files that were found.")
-def cli_run(data_dir, files, optional_files, return_correct, return_optional):
-    lists = compare_files_and_folders(files=FILE_LIST,
+              help='Return list of optional files that were found.')
+def cli_run(files, data_dir, optional_files, return_correct, return_optional):
+    lists = compare_files_and_folders(files=files,
+                                      root_dir=data_dir,
                                       optional_files=OPTIONAL_FILES,
-                                      root_dir=data_dir)
+                                      return_correct=return_correct,
+                                      return_optional=return_optional)
     print('Root dir (input):', data_dir)
     print('Root dir (real):', os.path.realpath(data_dir))
     pprint(lists)
