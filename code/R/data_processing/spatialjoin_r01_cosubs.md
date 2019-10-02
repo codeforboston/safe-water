@@ -1,10 +1,10 @@
 Spatial join of region 01 (New England) county subdivisions to
 SDWIS/External data
 ================
-2019-10-01
+2019-10-02
 
   - [Description](#description)
-      - [Load packages](#load-packages)
+  - [Load packages](#load-packages)
   - [I. Load and join data](#i.-load-and-join-data)
       - [Load spatial boundary data](#load-spatial-boundary-data)
       - [Load locations data](#load-locations-data)
@@ -13,6 +13,8 @@ SDWIS/External data
       - [Get SDWIS data](#get-sdwis-data)
       - [Generate dataset](#generate-dataset)
       - [Model 1](#model-1)
+          - [Examine data](#examine-data)
+          - [Apply logistic regression](#apply-logistic-regression)
       - [Heatmap](#heatmap)
 
 ## Description
@@ -30,7 +32,7 @@ Data sources:
     Community Survey 5-Year Estimates: [2017 (latest year available at
     present)](https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml?refresh=t)
 3.  external: [spatial grid: extreme rainfall
-    projections](http://precip.eas.cornell.edu/)
+    estimates](http://precip.eas.cornell.edu/)
 4.  external: [improved pwsid location coordinates in Google
     Drive](https://drive.google.com/open?id=1oCcKON45B3mmqagA1U964Wl2xz3xwgFXwEMucnIz93w)
 5.  SDWIS tables: water systems, violations
@@ -44,7 +46,7 @@ Coding outline:
 2.  Example modeling use: exploratory logistic regression and heatmap
     using coliform violations data.
 
-### Load packages
+## Load packages
 
 ``` r
 library(tidyr)
@@ -99,7 +101,7 @@ st_crs(epa01_cosub2018)
     ##   EPSG: 26918 
     ##   proj4string: "+proj=utm +zone=18 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
 
-  - Join extreme rainfall projections data also from spatial
+  - Join extreme rainfall estimates also from spatial
 repo
 
 <!-- end list -->
@@ -117,7 +119,7 @@ epa01_cosub2018 <- epa01_cosub2018 %>%
 
 ``` r
 plot(epa01_cosub2018["rpe_1d_1y"], 
-     main = "Extreme Precipitation Estimates (1 day/1 year") 
+     main = "Extreme Precipitation Estimates (1 day/1 year)")
 ```
 
 ![](md_files/spatialjoin_r01_cosubs/unnamed-chunk-4-1.png)<!-- -->
@@ -197,12 +199,12 @@ head(joined_df) %>% print.data.frame()
     ## 5      790   73450     <NA>        A 100392658 1832771 +41.8971227
     ## 6      790   73450     <NA>        A 100392658 1832771 +41.8971227
     ##       INTPTLON              GEO.id HC03_VC161 HC01_VC85 rpe_1d_1y
-    ## 1 -072.0203029 0600000US0901142600        4.2     88163  2461.558
-    ## 2 -072.3746584 0600000US0901301080        0.0    100507  2341.707
-    ## 3 -072.3746584 0600000US0901301080        0.0    100507  2341.707
-    ## 4 -072.1714268 0600000US0901501430        9.6     68846  2347.619
-    ## 5 -072.1714268 0600000US0901501430        9.6     68846  2347.619
-    ## 6 -072.1714268 0600000US0901501430        9.6     68846  2347.619
+    ## 1 -072.0203029 0600000US0901142600        4.2     88163  2.461558
+    ## 2 -072.3746584 0600000US0901301080        0.0    100507  2.341707
+    ## 3 -072.3746584 0600000US0901301080        0.0    100507  2.341707
+    ## 4 -072.1714268 0600000US0901501430        9.6     68846  2.347619
+    ## 5 -072.1714268 0600000US0901501430        9.6     68846  2.347619
+    ## 6 -072.1714268 0600000US0901501430        9.6     68846  2.347619
 
   - good, although 1 in MA (09) put in NH (33)
 
@@ -459,18 +461,20 @@ modeldata1_cosub %>% select(PWSID, GEOID:LAG_1) %>%
     ## # A tibble: 10 x 8
     ##    PWSID  GEOID  HC01_VC85 HC03_VC161 rpe_1d_1y VIOLYEAR COLI_HB_FLAG LAG_1
     ##    <chr>  <chr>      <dbl>      <dbl>     <dbl>    <dbl>        <dbl> <dbl>
-    ##  1 CT001~ 09013~    100507          0     2342.     2010            0    NA
-    ##  2 CT001~ 09013~    100507          0     2342.     2011            0     0
-    ##  3 CT001~ 09013~    100507          0     2342.     2012            0     0
-    ##  4 CT001~ 09013~    100507          0     2342.     2013            0     0
-    ##  5 CT001~ 09013~    100507          0     2342.     2014            0     0
-    ##  6 CT001~ 09013~    100507          0     2342.     2015            0     0
-    ##  7 CT001~ 09013~    100507          0     2342.     2010            0    NA
-    ##  8 CT001~ 09013~    100507          0     2342.     2011            0     0
-    ##  9 CT001~ 09013~    100507          0     2342.     2012            1     0
-    ## 10 CT001~ 09013~    100507          0     2342.     2013            0     1
+    ##  1 CT001~ 09013~    100507          0      2.34     2010            0    NA
+    ##  2 CT001~ 09013~    100507          0      2.34     2011            0     0
+    ##  3 CT001~ 09013~    100507          0      2.34     2012            0     0
+    ##  4 CT001~ 09013~    100507          0      2.34     2013            0     0
+    ##  5 CT001~ 09013~    100507          0      2.34     2014            0     0
+    ##  6 CT001~ 09013~    100507          0      2.34     2015            0     0
+    ##  7 CT001~ 09013~    100507          0      2.34     2010            0    NA
+    ##  8 CT001~ 09013~    100507          0      2.34     2011            0     0
+    ##  9 CT001~ 09013~    100507          0      2.34     2012            1     0
+    ## 10 CT001~ 09013~    100507          0      2.34     2013            0     1
 
 ### Model 1
+
+#### Examine data
 
   - Explore continuous data
       - skewed, leaving as is for now in model
@@ -499,7 +503,8 @@ round(cor(joined_df[c("HC03_VC161", "HC01_VC85", "rpe_1d_1y")],
     ## rpe_1d_1y       -0.27      0.49      1.00
 
   - Are census data (linearly) correlated?
-      - linear fit is negative; but non-linear appears more appropriate
+      - somewhat negative linear trend; but non-linear appears more
+        appropriate
 
 <!-- end list -->
 
@@ -523,6 +528,8 @@ joined_df %>% select(GEOID, HC01_VC85, HC03_VC161) %>%
 ```
 
 ![](md_files/spatialjoin_r01_cosubs/unnamed-chunk-20-1.png)<!-- -->
+
+#### Apply logistic regression
 
   - Loop to separately model by `PWS_TYPE_CODE` and show summary output
       - year considered catagorical (2011 = baseline)
@@ -698,15 +705,16 @@ for(i in 1:length(PWS_TYPE_CODES)){
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-  - Results overview
+  - Results overview (based on p-values from Type II tests)
       - Year, State, and lag effects throughout
-      - For CWS only, a negative effect for the poverty indicator and
-        for extreme rainfall estimates
+      - For CWS only, a negative relation to the poverty indicator and
+        extreme rainfall estimates
 
 ### Heatmap
 
-  - **All violations data**, deriving proportion of PWS with HB coliform
-    violation
+  - **NOTE: All violations data**
+      - deriving proportion of PWS having a HB coliform violation in any
+        year
 
 <!-- end list -->
 
@@ -776,18 +784,20 @@ hist(epa01_cosub2018_hmdat$COLI_HB_prp)
 
 ![](md_files/spatialjoin_r01_cosubs/unnamed-chunk-23-1.png)<!-- -->
 
-  - heat map
+  - plot heat map
 
 <!-- end list -->
 
 ``` r
 ggplot(epa01_cosub2018_hmdat) +
   geom_sf(aes(fill = COLI_HB_prp)) +
-  scale_fill_viridis_c(na.value="transparent")
+  scale_fill_viridis_c(na.value="transparent") +
+  labs(fill = "Proportion of water systems") + 
+  ggtitle("Coliform health-based violations per county subdivision")
 ```
 
 ![](md_files/spatialjoin_r01_cosubs/unnamed-chunk-24-1.png)<!-- -->
 
-  - Higher proportions in MA overall, and VT?
+  - Some state patterns, e.g., MA vs. CT
       - patterns within states; e.g., MA (northeast vs. rest of state)
         and CT (eastern vs. western, relatively)
