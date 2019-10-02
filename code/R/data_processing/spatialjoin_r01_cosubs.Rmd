@@ -21,7 +21,7 @@ Data sources:
 
 1. external: [spatial boundaries: 2018 county subdivisions](https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2018&layergroup=County+Subdivisions), also available [here](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html)
 2. external: SELECTED ECONOMIC CHARACTERISTICS 2013-2017 American Community Survey 5-Year Estimates: [2017  (latest year available at present)](https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml?refresh=t)
-3. external: [spatial grid: extreme rainfall projections](http://precip.eas.cornell.edu/)
+3. external: [spatial grid: extreme rainfall estimates](http://precip.eas.cornell.edu/)
 4. external: [improved pwsid location coordinates in Google Drive](https://drive.google.com/open?id=1oCcKON45B3mmqagA1U964Wl2xz3xwgFXwEMucnIz93w)
 5. SDWIS tables: water systems, violations
 
@@ -32,7 +32,7 @@ Coding outline:
 2. Example modeling use: exploratory logistic regression and heatmap using coliform violations data.
 
 
-### Load packages
+## Load packages
 
 ```{r message=FALSE}
 
@@ -72,7 +72,7 @@ st_crs(epa01_cosub2018)
 
 ```
 
-+ Join extreme rainfall projections data also from spatial repo
++ Join extreme rainfall estimates also from spatial repo
 
 ```{r message=FALSE}
 
@@ -86,8 +86,10 @@ epa01_cosub2018 <- epa01_cosub2018 %>%
 + Example chloropleth map to view the boundaries
 
 ```{r}
+
 plot(epa01_cosub2018["rpe_1d_1y"], 
-     main = "Extreme Precipitation Estimates (1 day/1 year") 
+     main = "Extreme Precipitation Estimates (1 day/1 year)")
+
 ```
 
 ### Load locations data
@@ -150,7 +152,9 @@ joined_df %>% filter(is.na(HC03_VC161) | is.na(HC01_VC85)) %>%
 
 ```
 
+
 ***
+
 
 ## II. Example modeling use
 
@@ -245,6 +249,7 @@ table(year(viol_coli$VIOLATION.COMPL_PER_BEGIN_DATE))
 
 
 ```{r}
+
 sample <- viols %>% 
   filter(year(VIOLATION.COMPL_PER_BEGIN_DATE) <= 2010) %>% 
   .$VIOLATION.PWSID %>% unique()
@@ -303,6 +308,8 @@ modeldata1_cosub %>% select(PWSID, GEOID:LAG_1) %>%
 
 ### Model 1
 
+#### Examine data
+
 * Explore continuous data
     + skewed, leaving as is for now in model
 
@@ -325,7 +332,7 @@ round(cor(joined_df[c("HC03_VC161", "HC01_VC85", "rpe_1d_1y")],
 ```
 
 * Are census data (linearly) correlated?
-    + linear fit is negative; but non-linear appears more appropriate
+    + somewhat negative linear trend; but non-linear appears more appropriate
 
 ```{r}
 
@@ -347,6 +354,8 @@ joined_df %>% select(GEOID, HC01_VC85, HC03_VC161) %>%
               colour="red", se = FALSE)
 
 ```
+
+#### Apply logistic regression
 
 * Loop to separately model by `PWS_TYPE_CODE` and show summary output 
     + year considered catagorical (2011 = baseline)
@@ -376,13 +385,14 @@ for(i in 1:length(PWS_TYPE_CODES)){
 
 ```
 
-* Results overview
+* Results overview (based on p-values from Type II tests)
     + Year, State, and lag effects throughout
-    + For CWS only, a negative effect for the poverty indicator and for extreme rainfall estimates
+    + For CWS only, a negative relation to the poverty indicator and extreme rainfall estimates
 
 ### Heatmap
 
-* **All violations data**, deriving proportion of PWS with HB coliform violation
+* **NOTE: All violations data**
+    + deriving proportion of PWS having a HB coliform violation in any year
 
 ```{r}
 
@@ -418,7 +428,9 @@ head(COLI_HB_hmdat2)
 
 ```
 
+
 * join to spatial data
+
 
 ```{r}
 
@@ -429,15 +441,23 @@ hist(epa01_cosub2018_hmdat$COLI_HB_prp)
 
 ```
 
-* heat map
+
+* plot heat map
+
 
 ```{r fig.height=7, fig.width=7}
 
 ggplot(epa01_cosub2018_hmdat) +
   geom_sf(aes(fill = COLI_HB_prp)) +
-  scale_fill_viridis_c(na.value="transparent")
+  scale_fill_viridis_c(na.value="transparent") +
+  labs(fill = "Proportion of water systems") + 
+  ggtitle("Coliform health-based violations per county subdivision")
+
 
 ```
 
-* Higher proportions in MA overall, and VT? 
+
+* Some state patterns, e.g., MA vs. CT
     + patterns within states; e.g., MA (northeast vs. rest of state) and CT (eastern vs. western, relatively)
+
+
