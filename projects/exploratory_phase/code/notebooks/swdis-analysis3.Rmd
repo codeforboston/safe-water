@@ -1,0 +1,171 @@
+---
+title: "swdis-analysis3"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+library(choroplethr)
+library(choroplethrMaps)
+library(noncensus)
+library(lubridate)
+```
+
+In this document, I will try to reproduce the dataset as discussed in the [National trends in drinking water quality violations](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5834717/).
+
+First, filter out water systems that have less than 500 users, and only keep CWS types.
+
+```{r}
+water_system <- read_csv("data/swdis/WATER_SYSTEM.csv", 
+                         col_types=cols_only(PWSID=col_character(),
+                                             POPULATION_SERVED_COUNT=col_integer(),
+                                             ORG_NAME=col_character(),
+                                             PWS_TYPE_CODE=col_factor(),
+                                             ZIP_CODE=col_character()
+                         ))
+clean_water_system <- water_system %>%
+  na.omit() %>%
+  filter(POPULATION_SERVED_COUNT<1000000, POPULATION_SERVED_COUNT>500, PWS_TYPE_CODE=="CWS")
+head(clean_water_system)
+```
+
+Read in the violations.
+
+```{r}
+violations <- read_csv("data/swdis/VIOLATION.csv",
+                       col_types = cols_only(
+  CONTAMINANT_CODE=col_character(),
+  PWSID=col_character(),
+  COMPL_PER_BEGIN_DATE=col_date(format="%d-%b-%y"),
+  COMPL_PER_END_DATE=col_date(format="%d-%b-%y")
+))
+head(violations)
+```
+
+Look at the violations per year.
+
+```{r}
+violations_per_year <- violations %>%
+  mutate(COMPL_PER_BEGIN_YEAR = year(COMPL_PER_BEGIN_DATE),
+         COMPL_PER_END_DATE = year(COMPL_PER_BEGIN_DATE)) %>%
+  rename(year=COMPL_PER_BEGIN_YEAR) %>%
+  mutate(year=as.integer(year)) %>%
+  filter(year <  2019) %>%
+  group_by(year) %>%
+  summarize(count=n())
+
+range(violations_per_year$year)
+```
+
+```{r}
+ggplot(violations_per_year,  aes(year,count)) +
+  geom_point()
+```
+
+Let's look at LCR_SAMPLE to see what it contains.
+
+```{r}
+lcr_sample <- read_csv("data/swdis/LCR_SAMPLE.csv") %>%
+  mutate(SAMPLING_START_DATE = dmy(SAMPLING_START_DATE)) %>%
+  mutate(year = year(SAMPLING_START_DATE)) %>%
+  select(PWSID, year, SAMPLING_START_DATE) %>%
+  group_by(PWSID) %>%
+  summarize(start=min(year), end=max(year)) %>%
+  mutate(range=end-start) %>% 
+  arrange(desc(range))
+  
+lcr_sample %>% head()
+  
+```
+
+```{r}
+violations <- read_csv("data/swdis/tidy/violations.csv",
+                       col_types = cols(
+  PWSID = col_character(),
+  STATE = col_factor(),
+  COUNTY_NAME = col_character(),
+  CITY = col_character(),
+  CONTAMINANT_CODE = col_integer(),
+  CONTAMINANT_NAME = col_character(),
+  YEAR = col_integer(),
+  BEGIN_DATE = col_date(),
+  END_DATE = col_date(),
+  DURATION_DAYS = col_integer()
+)) %>%
+  mutate(NAME=paste(CITY, COUNTY_NAME, STATE, sep=" - "))
+```
+
+
+```{r}
+violations_by_year_ma <- violations %>%
+  mutate(NAME=paste(CITY, COUNTY_NAME, STATE, sep=" - ")) %>%
+  filter(STATE=="MA") %>%
+  group_by(NAME, YEAR) %>%
+  summarize(COUNT=n())
+nrow(violations_by_year)
+violations_by_year_ma %>% head()
+```
+```{r fig.height=16}
+ggplot(violations_by_year_ma %>% head(60), aes(x=YEAR, y=COUNT)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~ NAME, ncol=3)
+```
+```{r, fig.height=16}
+violations_by_year_state <- violations %>%
+  filter(CONTAMINANT_CODE >= 3000, CONTAMINANT_CODE < 4000)  %>%
+  mutate(NAME=paste(CITY, COUNTY_NAME, STATE, sep=" - ")) %>%
+  group_by(STATE, YEAR) %>%
+  summarize(COUNT=sum(DURATION_DAYS))
+```
+
+```{r fig.height=16}
+ggplot(violations_by_year_state, aes(x=YEAR, y=COUNT)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~ STATE, ncol=8)
+```
+
+```{r}
+violations %>%
+  filter(STATE == "OK") %>%
+  filter(CONTAMINANT_CODE >= 3000, CONTAMINANT_CODE < 4000)  %>%
+  group_by(NAME, CONTAMINANT_NAME, YEAR) %>%
+  summarize(COUNT=n(), DAYS=sum(DURATION_DAYS)) %>%
+  arrange(desc(COUNT))
+```
+```{r}
+violations %>%
+  filter(STATE == "MA") %>%
+  arrange(desc(DURATION_DAYS))
+```
+
+```{r}
+violations %>%
+  filter(STATE == "MA") %>%
+  filter(CONTAMINANT_CODE >= 3000, CONTAMINANT_CODE < 4000)  %>%
+  group_by(NAME, CONTAMINANT_NAME, YEAR) %>%
+  summarize(COUNT=n(), DAYS=sum(DURATION_DAYS)) %>%
+  arrange(desc(COUNT))
+```
+
+```{r}
+clean_water_systems %>%
+  group_by(STATE) %>%
+  summarize(n=n()) %>%
+  arrange(desc(n))
+```
+
+```{r}
+violations %>%
+  filter(STATE == "OK") %>%
+  filter(CONTAMINANT_CODE >= 3000, CONTAMINANT_CODE < 4000) 
+  
+
+  ```
+
+```{r}
+contaminant_codes
+```
+
+foo

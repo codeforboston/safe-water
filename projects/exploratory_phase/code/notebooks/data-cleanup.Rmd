@@ -1,0 +1,119 @@
+---
+title: "Data cleanup"
+output:
+  html_document:
+    df_print: paged
+---
+
+---
+title: "SWDIS raw analysis"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(noncensus)
+library(lubridate)
+```
+
+# Cleaning up the water systems
+
+
+Get the contaminant codes.
+
+```{r}
+contaminant_codes <- read_csv("data/swdis/contaminant-codes.csv",
+                              col_types=cols(
+  CODE = col_integer(),
+  NAME = col_character(),
+  SCIENTIFIC_NAME = col_character(),
+  TYPE_CODE = col_factor()
+)) %>%
+  rename(CONTAMINANT_CODE=CODE, CONTAMINANT_NAME=NAME, CONTAMINANT_TYPE_CODE=TYPE_CODE)
+head(contaminant_codes)
+
+contaminant_group_codes <- read_csv("data/swdis/contaminant-group-codes.csv",
+                                    col_types=cols(
+  CONTAMINANT_CODE = col_integer(),
+  CONTAMINANT_NAME = col_character(),
+  CONTAMINANT_GROUP = col_character(),
+  CONTAMINANT_GROUP_CODE = col_factor()
+))
+```
+
+```{r}
+sort(unique(contaminant_group_codes$CONTAMINANT_CODE))
+```
+
+```{r}
+sort(unique(contaminant_codes$CONTAMINANT_CODE))
+```
+
+
+Get FIPS region codes.
+
+Try to convert county fips code to a categorical data to get the county name.
+
+```{r}
+data(counties)
+
+counties2 <- counties %>%
+  mutate(fips = as.integer(paste0(state_fips, county_fips))) %>%
+  select(fips, county_name, state) %>%
+  rename(region=fips)
+counties2 %>% head()
+```
+
+```{r}
+data(zip_codes)
+
+names(zip_codes)
+
+clean_zip_codes <- zip_codes %>% select(zip, city, state, fips)
+```
+
+```{r}
+water_system <- read_csv("data/swdis/WATER_SYSTEM.csv", 
+                         col_types=cols_only(PWSID=col_character(),
+                                             POPULATION_SERVED_COUNT=col_integer(),
+                                             ORG_NAME=col_character(),
+                                             PWS_TYPE_CODE=col_factor(),
+                                             ZIP_CODE=col_character()
+                         ))
+clean_water_systems <- water_system %>%
+  na.omit() %>%
+  filter(POPULATION_SERVED_COUNT<1000000, POPULATION_SERVED_COUNT>500, PWS_TYPE_CODE=="CWS") %>%
+  inner_join(clean_zip_codes %>% select(city, fips, zip), by=c("ZIP_CODE"="zip")) %>%
+  rename(region=fips) %>%
+  left_join(counties2, by="region") %>%
+  rename(CITY=city, COUNTY_NAME=county_name, STATE=state, REGION=region)
+
+clean_water_systems %>% head()
+
+violations <- read_csv("data/swdis/VIOLATION.csv",
+                       col_types = cols_only(
+  CONTAMINANT_CODE=col_integer(),
+  PWSID=col_character(),
+  COMPL_PER_BEGIN_DATE=col_date(format="%d-%b-%y"),
+  COMPL_PER_END_DATE=col_date(format="%d-%b-%y"))) %>%
+  inner_join(clean_water_systems, by=c("PWSID")) %>%
+  left_join(contaminant_codes, by="CONTAMINANT_CODE") %>%
+  mutate(YEAR=year(COMPL_PER_BEGIN_DATE)) %>%
+  rename(BEGIN_DATE=COMPL_PER_BEGIN_DATE, END_DATE=COMPL_PER_END_DATE) %>%
+  mutate(DURATION_DAYS=(END_DATE - BEGIN_DATE)) %>%
+  select(PWSID, STATE, COUNTY_NAME, CITY, CONTAMINANT_CODE, CONTAMINANT_NAME, YEAR, BEGIN_DATE, END_DATE, DURATION_DAYS)
+
+violations %>% head()
+```
+```{r}
+sort(unique(violations$CONTAMINANT_CODE))
+```
+
+Write it back out to csv
+
+```{r}
+write_csv(violations, "data/swdis/tidy/violations.csv")
+```
