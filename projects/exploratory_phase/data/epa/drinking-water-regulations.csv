@@ -1,0 +1,91 @@
+﻿CONTAMINANT,SDWIS_CONTAMINANT_CODE,TYPE,MCL_GOAL,MCL_OR_TT,POTENTIAL_HEALTH_EFFECTS,SOURCES_OF_CONTAMINANT_IN_DRINKING_WATER
+Cryptosporidium,2078,Microorganisms,zero,TT3,"Gastrointestinal illness (such as diarrhea, vomiting, and cramps)",Human and animal fecal waste
+Giardia lamblia,3008,Microorganisms,zero,TT3,"Gastrointestinal illness (such as diarrhea, vomiting, and cramps)",Human and animal fecal waste
+Heterotrophic plate count (HPC),3001,Microorganisms,n/a,TT3,"HPC has no health effects; it is an analytic method used to measure the variety of bacteria that are common in water. The lower the concentration of bacteria in drinking water, the better maintained the water system is.",HPC measures a range of bacteria that are naturally present in the environment
+Legionella,3012,Microorganisms,zero,TT3,"Legionnaire's Disease, a type of pneumonia",Found naturally in water; multiplies in heating systems
+Total Coliforms (including fecal coliform and E. Coli),3100,Microorganisms,zero,5.0%4,Not a health threat in itself; it is used to indicate whether other potentially harmful bacteria may be present5,Coliforms are naturally present in the environment; as well as feces; fecal coliforms and E. coli only come from human and animal fecal waste.
+Turbidity,0100,Microorganisms,n/a,TT3,"Turbidity is a measure of the cloudiness of water. It is used to indicate water quality and filtration effectiveness (such as whether disease-causing organisms are present). Higher turbidity levels are often associated with higher levels of disease-causing microorganisms such as viruses, parasites and some bacteria. These organisms can cause symptoms such as nausea, cramps, diarrhea, and associated headaches.",Soil runoff
+Echoviruses,3400,Microorganisms,zero,TT3,"Gastrointestinal illness (such as diarrhea, vomiting, and cramps)",Human and animal fecal waste
+Coxsackievirus,3410,Microorganisms,zero,TT3,"Gastrointestinal illness (such as diarrhea, vomiting, and cramps)",Human and animal fecal waste
+Calicivirus,3420,Microorganisms,zero,TT3,"Gastrointestinal illness (such as diarrhea, vomiting, and cramps)",Human and animal fecal waste
+Adenovirus,3430,Microorganisms,zero,TT3,"Gastrointestinal illness (such as diarrhea, vomiting, and cramps)",Human and animal fecal waste
+Bromate,1011,Disinfection Byproducts,zero,0.01,Increased risk of cancer,Byproduct of drinking water disinfection
+Chlorite,1009,Disinfection Byproducts,0.8,1,Anemia; infants and young children: nervous system effects,Byproduct of drinking water disinfection
+Haloacetic acids (HAA5),2456,Disinfection Byproducts,n/a6,0.06,Increased risk of cancer,Byproduct of drinking water disinfection
+Total Trihalomethanes (TTHMs),2949,Disinfection Byproducts,--> n/a6,========-->--> 0.080,"Liver, kidney or central nervous system problems; increased risk of cancer",Byproduct of drinking water disinfection
+Chloramines (as Cl2),1006,Disinfectants,MRDLG=41,MRDL=4.01,"Eye/nose irritation; stomach discomfort, anemia",Water additive used to control microbes
+Chlorine (as Cl2),0999,Disinfectants,MRDLG=41,MRDL=4.01,Eye/nose irritation; stomach discomfort,Water additive used to control microbes
+Chlorine dioxide (as ClO2),1008,Disinfectants,MRDLG=0.81,MRDL=0.81,Anemia; infants and young children: nervous system effects,Water additive used to control microbes
+Antimony,1074,Inorganic Chemicals,0.006,0.006,Increase in blood cholesterol; decrease in blood sugar,Discharge from petroleum refineries; fire retardants; ceramics; electronics; solder
+Arsenic,1005,Inorganic Chemicals,0,0.010 as of 01/23/06,"Skin damage or problems with circulatory systems, and may have increased risk of getting cancer","Erosion of natural deposits; runoff from orchards, runoff from glass and electronicsproduction wastes"
+Asbestos (fiber > 10 micrometers),1094,Inorganic Chemicals,7 million fibers per liter (MFL),7 MFL,Increased risk of developing benign intestinal polyps,Decay of asbestos cement in water mains; erosion of natural deposits
+Barium,1010,Inorganic Chemicals,2,2,Increase in blood pressure,Discharge of drilling wastes; discharge from metal refineries; erosion of natural deposits
+Beryllium,1075,Inorganic Chemicals,0.004,0.004,Intestinal lesions,"Discharge from metal refineries and coal-burning factories; discharge from electrical, aerospace, and defense industries"
+Cadmium,1015,Inorganic Chemicals,0.005,0.005,Kidney damage,Corrosion of galvanized pipes; erosion of natural deposits; discharge from metal refineries; runoff from waste batteries and paints
+Chromium (total),1020,Inorganic Chemicals,0.1,0.1,Allergic dermatitis,Discharge from steel and pulp mills; erosion of natural deposits
+Copper,1022,Inorganic Chemicals,1.3,TT7; Action Level=1.3,Short term exposure: Gastrointestinal distress; Long term exposure: Liver or kidney damage; People with Wilson's Disease should consult their personal doctor if the amount of copper in their water exceeds the action level,Corrosion of household plumbing systems; erosion of natural deposits
+Cyanide (as free cyanide),1024,Inorganic Chemicals,0.2,0.2,Nerve damage or thyroid problems,Discharge from steel/metal factories; discharge from plastic and fertilizer factories
+Fluoride,1025,Inorganic Chemicals,4,4,Bone disease (pain and tenderness of the bones); Children may get mottled teeth,Water additive which promotes strong teeth; erosion of natural deposits; discharge from fertilizer and aluminum factories
+Lead,1030,Inorganic Chemicals,zero,TT7; Action Level=0.015,Infants and children: Delays in physical or mental development; children could show slight deficits in attention span and learning abilities; Adults: Kidney problems; high blood pressure,Corrosion of household plumbing systems; erosion of natural deposits
+Mercury (inorganic),1035,Inorganic Chemicals,0.002,0.002,Kidney damage,Erosion of natural deposits; discharge from refineries and factories; runoff from landfills and croplands
+Nitrate (measured as Nitrogen),1040,Inorganic Chemicals,10,10,"Infants below the age of six months who drink water containing nitrate in excess of the MCL could become seriously ill and, if untreated, may die. Symptoms include shortness of breath and blue-baby syndrome.","Runoff from fertilizer use; leaking from septic tanks, sewage; erosion of natural deposits"
+Nitrite (measured as Nitrogen),1041,Inorganic Chemicals,1,1,"Infants below the age of six months who drink water containing nitrite in excess of the MCL could become seriously ill and, if untreated, may die. Symptoms include shortness of breath and blue-baby syndrome.","Runoff from fertilizer use; leaking from septic tanks, sewage; erosion of natural deposits"
+Selenium,1045,Inorganic Chemicals,0.05,0.05,Hair or fingernail loss; numbness in fingers or toes; circulatory problems,Discharge from petroleum refineries; erosion of natural deposits; discharge from mines
+Thallium,1085,Inorganic Chemicals,0.0005,0.002,"Hair loss; changes in blood; kidney, intestine, or liver problems","Leaching from ore-processing sites; discharge from electronics, glass, and drug factories"
+Acrylamide,2265,Organic Chemicals,zero,TT8,Nervous system or blood problems; increased risk of cancer,Added to water during sewage/wastewater treatment
+Alachlor,2004,Organic Chemicals,zero,0.002,"Eye, liver, kidney or spleen problems; anemia; increased risk of cancer",Runoff from herbicide used on row crops
+Atrazine,2050,Organic Chemicals,0.003,0.003,Cardiovascular system or reproductive problems,Runoff from herbicide used on row crops
+Benzene,2990,Organic Chemicals,zero,0.005,Anemia; decrease in blood platelets; increased risk of cancer,Discharge from factories; leaching from gas storage tanks and landfills
+Benzo(a)pyrene (PAHs),2306,Organic Chemicals,zero,0.0002,Reproductive difficulties; increased risk of cancer,Leaching from linings of water storage tanks and distribution lines
+Carbofuran,2046,Organic Chemicals,0.04,0.04,"Problems with blood, nervous system, or reproductive system",Leaching of soil fumigant used on rice and alfalfa
+Carbon tetrachloride,2982,Organic Chemicals,zero,0.005,Liver problems; increased risk of cancer,Discharge from chemical plants and other industrial activities
+Chlordane,2959,Organic Chemicals,zero,0.002,Liver or nervous system problems; increased risk of cancer,Residue of banned termiticide
+Chlorobenzene,2989,Organic Chemicals,0.1,0.1,Liver or kidney problems,Discharge from chemical and agricultural chemical factories
+"2,4-D",2105,Organic Chemicals,0.07,0.07,"Kidney, liver, or adrenal gland problems",Runoff from herbicide used on row crops
+Dalapon,2031,Organic Chemicals,0.2,0.2,Minor kidney changes,Runoff from herbicide used on rights of way
+"1,2-Dibromo-3-chloropropane (DBCP)",2931,Organic Chemicals,zero,0.0002,Reproductive difficulties; increased risk of cancer,"Runoff/leaching from soil fumigant used on soybeans, cotton, pineapples, and orchards"
+o-Dichlorobenzene,2968,Organic Chemicals,0.6,0.6,"Liver, kidney, or circulatory system problems",Discharge from industrial chemical factories
+p-Dichlorobenzene,2969,Organic Chemicals,0.075,0.075,"Anemia; liver, kidney or spleen damage; changes in blood",Discharge from industrial chemical factories
+"1,2-Dichloroethane",2980,Organic Chemicals,zero,0.005,Increased risk of cancer,Discharge from industrial chemical factories
+"1,1-Dichloroethylene",2977,Organic Chemicals,0.007,0.007,Liver problems,Discharge from industrial chemical factories
+"cis-1,2-Dichloroethylene",2380,Organic Chemicals,0.07,0.07,Liver problems,Discharge from industrial chemical factories
+"trans-1,2-Dichloroethylene",2979,Organic Chemicals,0.1,0.1,Liver problems,Discharge from industrial chemical factories
+Dichloromethane,2964,Organic Chemicals,zero,0.005,Liver problems; increased risk of cancer,Discharge from drug and chemical factories
+"1,2-Dichloropropane",2983,Organic Chemicals,zero,0.005,Increased risk of cancer,Discharge from industrial chemical factories
+Di(2-ethylhexyl) adipate,2035,Organic Chemicals,0.4,0.4,"Weight loss, liver problems, or possible reproductive difficulties.",Discharge from chemical factories
+Di(2-ethylhexyl) phthalate,2039,Organic Chemicals,zero,0.006,Reproductive difficulties; liver problems; increased risk of cancer,Discharge from rubber and chemical factories
+Dinoseb,2041,Organic Chemicals,0.007,0.007,Reproductive difficulties,Runoff from herbicide used on soybeans and vegetables
+"Dioxin (2,3,7,8-TCDD)",2063,Organic Chemicals,zero,0.00000003,Reproductive difficulties; increased risk of cancer,Emissions from waste incineration and other combustion; discharge from chemical factories
+Diquat,2032,Organic Chemicals,0.02,0.02,Cataracts,Runoff from herbicide use
+Endothall,2033,Organic Chemicals,0.1,0.1,Stomach and intestinal problems,Runoff from herbicide use
+Endrin,2005,Organic Chemicals,0.002,0.002,Liver problems,Residue of banned insecticide
+Epichlorohydrin,2257,Organic Chemicals,zero,TT8,"Increased cancer risk, and over a long period of time, stomach problems",Discharge from industrial chemical factories; an impurity of some water treatment chemicals
+Ethylbenzene,2992,Organic Chemicals,0.7,0.7,Liver or kidneys problems,Discharge from petroleum refineries
+Ethylene dibromide,2946,Organic Chemicals,zero,0.00005,"Problems with liver, stomach, reproductive system, or kidneys; increased risk of cancer",Discharge from petroleum refineries
+Glyphosate,2034,Organic Chemicals,0.7,0.7,Kidney problems; reproductive difficulties,Runoff from herbicide use
+Heptachlor,2065,Organic Chemicals,zero,0.0004,Liver damage; increased risk of cancer,Residue of banned termiticide
+Heptachlor epoxide,2067,Organic Chemicals,zero,0.0002,Liver damage; increased risk of cancer,Breakdown of heptachlor
+Hexachlorobenzene,2274,Organic Chemicals,zero,0.001,Liver or kidney problems; reproductive difficulties; increased risk of cancer,Discharge from metal refineries and agricultural chemical factories
+Hexachlorocyclopentadiene,2042,Organic Chemicals,0.05,0.05,Kidney or stomach problems,Discharge from chemical factories
+Lindane,,Organic Chemicals,0.0002,0.0002,Liver or kidney problems,"Runoff/leaching from insecticide used on cattle, lumber, gardens"
+Methoxychlor,2015,Organic Chemicals,0.04,0.04,Reproductive difficulties,"Runoff/leaching from insecticide used on fruits, vegetables, alfalfa, livestock"
+Oxamyl (Vydate),2036,Organic Chemicals,0.2,0.2,Slight nervous system effects,"Runoff/leaching from insecticide used on apples, potatoes, and tomatoes"
+Polychlorinated biphenyls (PCBs),2383,Organic Chemicals,zero,0.0005,Skin changes; thymus gland problems; immune deficiencies; reproductive or nervous system difficulties; increased risk of cancer,Runoff from landfills; discharge of waste chemicals
+Pentachlorophenol,2326,Organic Chemicals,zero,0.001,Liver or kidney problems; increased cancer risk,Discharge from wood preserving factories
+Picloram,2040,Organic Chemicals,0.5,0.5,Liver problems,Herbicide runoff
+Simazine,2037,Organic Chemicals,0.004,0.004,Problems with blood,Herbicide runoff
+Styrene,2996,Organic Chemicals,0.1,0.1,"Liver, kidney, or circulatory system problems",Discharge from rubber and plastic factories; leaching from landfills
+Tetrachloroethylene,2987,Organic Chemicals,zero,0.005,Liver problems; increased risk of cancer,Discharge from factories and dry cleaners
+Toluene,2991,Organic Chemicals,1,1,"Nervous system, kidney, or liver problems",Discharge from petroleum factories
+Toxaphene,2020,Organic Chemicals,zero,0.003,"Kidney, liver, or thyroid problems; increased risk of cancer",Runoff/leaching from insecticide used on cotton and cattle
+"2,4,5-TP (Silvex)",2110,Organic Chemicals,0.05,0.05,Liver problems,Residue of banned herbicide
+"1,2,4-Trichlorobenzene",2378,Organic Chemicals,0.07,0.07,Changes in adrenal glands,Discharge from textile finishing factories
+"1,1,1-Trichloroethane",2981,Organic Chemicals,0.2,0.2,"Liver, nervous system, or circulatory problems",Discharge from metal degreasing sites and other factories
+"1,1,2-Trichloroethane",2985,Organic Chemicals,0.003,0.005,"Liver, kidney, or immune system problems",Discharge from industrial chemical factories
+Trichloroethylene,2984,Organic Chemicals,zero,0.005,Liver problems; increased risk of cancer,Discharge from metal degreasing sites and other factories
+Vinyl chloride,2976,Organic Chemicals,zero,0.002,Increased risk of cancer,Leaching from PVC pipes; discharge from plastic factories
+Xylenes (total),2955,Organic Chemicals,10,10,Nervous system damage,Discharge from petroleum factories; discharge from chemical factories
+Alpha particles,4109,Radionuclides,none ---------- zero,15 picocuries per Liter (pCi/L),Increased risk of cancer,Erosion of natural deposits of certain minerals that are radioactive and may emit a form of radiation known as alpha radiation
+Beta particles and photon emitters,4100,Radionuclides,none ---------- zero,4 millirems per year,Increased risk of cancer,Decay of natural and man-made deposits of
+Radium 226 and Radium 228 (combined),4010,Radionuclides,none ---------- zero,5 pCi/L,Increased risk of cancer,Erosion of natural deposits
+Uranium,4006,Radionuclides,zero,30 ug/L as of 12/08/03,"Increased risk of cancer, kidney toxicity",Erosion of natural deposits
