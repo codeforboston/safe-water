@@ -1,8 +1,8 @@
 # Data Overview
 
-## `data/` Folder Structure
+## `exploratory_phase/data/` Folder Structure
 
-This is the default structure of the `data/` folder on the master branch.
+This is the default structure of the `exploratory_phase/data/` folder on the master branch.
 
 Feel free to add additional data on other branches by following the [Data Contributions](data-contributions.md) guide.
 

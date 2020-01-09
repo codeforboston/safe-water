@@ -10,7 +10,7 @@ In addition to technology requirements, there are some data requirements. If you
 
 ### Python
 
-Download the latest version of Python [here](https://www.python.org/downloads/). Alternatively, you may be interested in downloading [Anaconda](https://www.anaconda.com/distribution/), which is a distribution of Python that comes with tons of data science tools pre-installed. You can read more about different Python distributions and their pros and cons [here](https://www.infoworld.com/article/3267976/anaconda-cpython-pypy-and-more-know-your-python-distributions.html). If you need additional help getting started in Python, check out [this guide](https://wiki.python.org/moin/BeginnersGuide).
+Download the latest version of Python [here](https://www.python.org/downloads/). Alternatively, you may be interested in downloading [Anaconda](https://www.anaconda.com/distribution/), which is a distribution of Python that comes pre-installed with tons of data science tools (with a bare bones installation of Python, you need to preinstall these yourself). You can read more about different Python distributions and their pros and cons [here](https://www.infoworld.com/article/3267976/anaconda-cpython-pypy-and-more-know-your-python-distributions.html). If you need additional help getting started in Python, check out [this guide](https://wiki.python.org/moin/BeginnersGuide).
 
 ### Jupyter Notebook
 
