@@ -1,6 +1,5 @@
 # Additional links
 
-
 ## Research links
 
 [National trends in drinking water quality violations](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5834717/)
@@ -14,7 +13,6 @@ a New York Times article about the PNAS articlee
 
 [Threats on Tap](https://www.nrdc.org/resources/threats-tap-widespread-violations-water-infrastructure),
 an NRDC article about safe drinking water violations.
-
 
 ## Zip of scraped CSVs
 

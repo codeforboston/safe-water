@@ -1,0 +1,8 @@
+"Project_ID","Project_Code","Project_Name","WetDry_Definition","Rain_Gauge"
+1,"CYN","Cyanobacteria","Events with greater than 0.1"" of rain in the previous 72 hours are considered wet weather, events with less than 0.1"" of rain in the previous 72 hours are considered dry weather events.","Logan"
+2,"FIFI","Find It and Fix It",,
+3,"FLG","Flagging","Events with greater than 0.2"" of rain in the previous 72 hours are considered wet weather, events with less than 0.2"" of rain in the previous 72 hours are considered dry weather events.","Logan"
+4,"FLOW","Flow Monitoring",,
+5,"MC","Mystic Collaborative",,
+6,"TMDL","Total Maximum Daily Load",,
+7,"VMM","Volunteer Monthly Monitoring","Events with greater than 0.1"" of rain in the previous 72 hours are considered wet weather, events with less than 0.1"" of rain in the previous 72 hours are considered dry weather events.","Logan"
