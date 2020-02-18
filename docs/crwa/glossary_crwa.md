@@ -3,7 +3,7 @@
 ### Benthic macroinvertibrate (BMI)
 Benthic macroinvertibrates are small aquatic animals and aquatic larval stages of insects that are large enough to see without a microscope.  They are typically found at the bottom of rivers.  Benthic means "bottom dwelling."  They are fairly easy to collect and/or observe and therefore are a convenient way to assess the biological healthfulness of a river (source:  EPA website)
 
-### Blue-green algae:  
+### Blue-green algae
 (This is an alternative term for Cyanobacteria)
 
 ### Cyanobacteria
