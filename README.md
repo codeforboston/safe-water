@@ -12,7 +12,7 @@ Representatives for nonprofit organizations and government agencies interested i
 
 The Safe Water Project works with Boston-based community partners. These organizations have lots of needs related to data infrastructure and data science, and we provide our expertise in assisting them.   
 
-Currently we work with the [Charles River Watershed Association](https://www.crwa.org/).
+**Currently we work with the [Charles River Watershed Association](https://www.crwa.org/).**
 
 ### Exploration of EPA Data
 
