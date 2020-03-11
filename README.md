@@ -1,6 +1,6 @@
 # Safe Water Project 🚰
 
-The Safe Water Project is a team of volunteers at [Code for Boston](https://www.codeforboston.org/) who are using data modeling and machine learning to predict the presence of hazardous drinking and surface water contaminants in the United States. Our goals are to identify at-risk communities, hazards and risks posed by water contaminantion, and health concerns related to contamination of drinking water.
+The Safe Water Project is a team of volunteers at [Code for Boston](https://www.codeforboston.org/) who are using data modeling, data visualization and machine learning to predict and visualize the presence of hazardous drinking and surface water contaminants in the United States. Our goals are to identify at-risk communities, hazards and risks posed by water contaminantion, and health concerns related to contamination of drinking water.
 
 #### We are interested in collaborating with health and environmental organizations.
 
@@ -10,7 +10,9 @@ Representatives for nonprofit organizations and government agencies interested i
 
 ### Institutional Partners
 
-The Safe Water Project works with two Boston-based community partners: the [Charles River Watershed Association](https://www.crwa.org/) and the [PFAS Project at Northeastern University](https://pfasproject.com/). These organizations have lots of needs related to data and data science, and we provide our expertise in assisting them.
+The Safe Water Project works with Boston-based community partners. These organizations have lots of needs related to data infrastructure and data science, and we provide our expertise in assisting them.   
+
+**Currently we work with the [Charles River Watershed Association](https://www.crwa.org/).**
 
 ### Exploration of EPA Data
 
@@ -22,8 +24,9 @@ Most volunteers work in [python](http://python.org) with [pandas](https://pandas
 
 - [Slack channel](https://cfb-public.slack.com): #water
   - [Join Code for Boston's Slack Workplace](https://communityinviter.com/apps/cfb-public/code-for-boston)
-- [Trello - Project Board](https://trello.com/b/qP7oYyWn/safe-water)
+- [Project Board](https://github.com/codeforboston/safe-water/projects)
 - [Google Drive - Notes and Research](https://drive.google.com/drive/folders/1FbQE9_NP664lkz4d-Xu4omijLl-HNklz)
+- [Wiki - how to contribute etc.](https://github.com/codeforboston/safe-water/wiki)
 
 ## Join Us
 
