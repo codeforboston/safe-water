@@ -25,5 +25,5 @@ The Safe Water Project is not just one project-- it is multiple projects rolled 
 ## Useful Links
 
 - [BIB Slack channel](https://cfb-public.slack.com) - [#water](https://cfb-public.slack.com/messages/CCLJ365EV/)
-- [Trello - Project Board](https://trello.com/b/qP7oYyWn/safe-water)
+- [Project Board](https://github.com/codeforboston/safe-water/projects/1)
 - [Google Drive - Notes and Research](https://drive.google.com/drive/folders/1FbQE9_NP664lkz4d-Xu4omijLl-HNklz)
