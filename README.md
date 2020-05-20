@@ -1,6 +1,6 @@
 # Safe Water Project 🚰
 
-The Safe Water Project is a team of volunteers at [Code for Boston](https://www.codeforboston.org/) who are using data modeling, data visualization and machine learning to predict and visualize the presence of hazardous drinking and surface water contaminants in the United States. Our goals are to identify at-risk communities, hazards and risks posed by water contaminantion, and health concerns related to contamination of drinking water.
+The Safe Water Project is a team of volunteers at [Code for Boston](https://www.codeforboston.org/) who are using data modeling, data visualization and machine learning to predict, visualize, and share data about the presence of hazardous drinking and surface water contaminants in the United States. 
 
 #### We are interested in collaborating with health and environmental organizations.
 
@@ -10,15 +10,11 @@ Representatives for nonprofit organizations and government agencies interested i
 
 ### Institutional Partners
 
-The Safe Water Project works with Boston-based community partners. These organizations have lots of needs related to data infrastructure and data science, and we provide our expertise in assisting them.   
+The Safe Water Project works with Boston-based community partners. These organizations have needs related to data infrastructure and data science, and we provide our expertise in assisting them.   
 
-**Currently we work with the [Charles River Watershed Association](https://www.crwa.org/).**
+**Currently we work with the [Charles River Watershed Association](https://www.crwa.org/).** We help them deploying their predictive model, visualizing and communicating their data, as well as better understanding their constituents. You can learn more about this project [in the related folder](https://github.com/codeforboston/safe-water/tree/master/projects/crwa).
 
-### Exploration of EPA Data
-
-We are interested in data that helps identify hazardous drinking water. Our analyses primarily utilize the Environmental Protection Agency's (EPA) [Safe Drinking Water Information System](https://www.epa.gov/enviro/sdwis-overview) (SDWIS) as our violations data; this data contains information about drinking water violations for public water systems across the United States. In addition to SDWIS, we are interested in any data that may help better predict drinking water violations when combined with violations data, such as [rainfall data](https://www.ncdc.noaa.gov/cdo-web/webservices/v2) and [demographic data](https://www.census.gov/developers/).
-
-Most volunteers work in [python](http://python.org) with [pandas](https://pandas.pydata.org/). Some volunteers also use [R](https://www.r-project.org/).
+Most volunteers work in [python](http://python.org) with [pandas](https://pandas.pydata.org/). Some volunteers also use [R](https://www.r-project.org/), or PHP.
 
 ## Project Materials and Communications
 
