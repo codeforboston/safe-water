@@ -20,7 +20,6 @@ Most volunteers work in [python](http://python.org) with [pandas](https://pandas
 
 - [Slack channel](https://cfb-public.slack.com): #water
   - [Join Code for Boston's Slack Workplace](https://communityinviter.com/apps/cfb-public/code-for-boston)
-- [Project Board](https://github.com/codeforboston/safe-water/projects)
 - [Google Drive - Notes and Research](https://drive.google.com/drive/folders/1FbQE9_NP664lkz4d-Xu4omijLl-HNklz)
 - [Wiki - how to contribute etc.](https://github.com/codeforboston/safe-water/wiki)
 
