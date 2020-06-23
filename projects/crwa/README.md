@@ -2,7 +2,7 @@
 
 # Charles River Watershed Association (CRWA)
 
-The Charles River Watershed Association (CRWA) is a non-governmental organization (NGO) that "strives to protect, restore and enhance the Charles River and its watershed through science, advocacy, and law." In 2020, the Safe Water Project is collaborating with the CRWA to provide on expertise in addressing some of their challenges related to data processes, data visualization, and other data-related tasks.
+The Charles River Watershed Association (CRWA) is a non-governmental organization (NGO) that "strives to protect, restore, and enhance the Charles River and its watershed through science, advocacy, and law." In 2020, the Safe Water Project is collaborating with the CRWA to provide expertise in addressing some of their challenges related to data processes, data visualization, and other data-related tasks.
 
 # Background
 
@@ -24,7 +24,7 @@ The flagging project has [a separate repo](https://github.com/codeforboston/flag
 
 Another team is working on a "data visualization and data sharing tool". The purpose of the tool is to share data in a way that is both accessible and useful in order to engage stakeholders to make data-driven decisions in their lives and communities, while also giving the possibility to CRWA to communicate about and with its data to engage with stakeholders.  
 
-We are a group of user researchers, designers, data visualization specialist, and data analyst working on a visualization tool that will help CRWA share its data with the public.  
+We are a group of user researchers, designers, data visualization specialists, and data analysts working on a visualization tool that will help CRWA share its data with the public.  
 
 We are currently conducting user research and doing design work, so our work is not on GitHub. You can join us by joining our [Slack channel](https://communityinviter.com/apps/cfb-public/code-for-boston) (#water).  
 
