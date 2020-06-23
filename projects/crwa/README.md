@@ -29,4 +29,6 @@ We are a group of user researchers, designers, data visualization specialists, a
 We are currently conducting user research and doing design work, so our work is not on GitHub. You can join us by joining our [Slack channel](https://communityinviter.com/apps/cfb-public/code-for-boston) (#water).  
 
 
+# Organization
 
+In the folders /data and /notebooks, you will find our data exploration of the CRWA river quality dataset.
